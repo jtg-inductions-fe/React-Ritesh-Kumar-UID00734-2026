@@ -3,8 +3,17 @@
         "baseUrl": "./src",
         "paths": {
             "@assets/*": ["assets/*"],
+            "@components/*": ["components/*"],
             "@constant": ["constant/index"],
-            "@theme": ["theme/index"]
+            "@containers/*": ["containers/*"],
+            "@features/*": ["features/*"],
+            "@hooks/*": ["hooks/*"],
+            "@pages/*": ["pages/*"],
+            "@routes/*": ["routes/*"],
+            "@services/*": ["services/*"],
+            "@theme": ["theme/index"],
+            "@utils/*": ["utils/*"],
+            "@test/*": ["test/*"]
         }
     }
 }

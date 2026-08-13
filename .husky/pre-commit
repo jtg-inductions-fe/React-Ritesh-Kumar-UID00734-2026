@@ -15,5 +15,4 @@ else
   fi
 fi
 
-# Run pre-commit script
-npm run pre-commit
+yarn lint-staged

@@ -1,114 +1,105 @@
-## React Base Template
+# GitHub User App (Sora)
 
-## Getting Started
+## Overview
+
+A React-based GitHub user discovery application that uses the GitHub API to search and explore users, view user profiles, follow users, and provide follow suggestions.
+
+The application includes both public and authenticated functionality, with protected routes for features that require authentication.
+
+## Tech Stack
+
+- **React 19** — UI development
+- **TypeScript** — Type-safe development
+- **Vite** — Development server and build tooling
+- **Redux Toolkit** — Global state management
+- **Redux Thunk** — Asynchronous Redux actions
+- **React Router** — Client-side routing and protected routes
+- **Material UI** — UI components and styling
+
+## Setup
 
 ### Prerequisites
 
-- **Node.js**: Version 20+. You can download and install it from nodejs.org.
-- **yarn**: Version 4.5.0. If Yarn is not installed, you can follow the instruction below in Installing section
+- **Node.js:** 20+
+- **Yarn:** 4.x
 
-### Installing
+The project contains an `.nvmrc` file with the recommended Node.js version.
 
-To set up the project on your local environment, follow these steps:
+### 1. Clone the repository
 
-1. **Clone the Repository**
+```bash
+git clone <repository-url>
+cd <project-directory>
+```
 
-    First, you need to clone the repository.
+### 2. Setup Node.js
 
-2. **nvm (Node Version Manager)**: If the required Node version 20+ is already installed and active, you can skip this step else you can use nvm (Node Version Manager). Here's how to use it:
+If you are using NVM and the required Node.js version is already installed:
 
-    - **Switch Node Version**: If the required Node version is already installed, run:
+```bash
+nvm use
+```
 
-    ```bash
-    nvm use
-    ```
+If the required version is not installed:
 
-    - **Install Node Version**: If the required Node version isn’t installed, you can install it by running:
+```bash
+nvm install
+```
 
-    ```bash
-    nvm install
-    ```
+If NVM is not installed, install it from the official repository:
 
-    > **_Tip:_** If you don't have nvm installed, you can install it by following the instructions on [nvm-sh/nvm](https://github.com/nvm-sh/nvm).
+https://github.com/nvm-sh/nvm
 
-    Alternatively, you can update Node.js directly by downloading the latest version from the official website: nodejs.org.
+Alternatively, Node.js can be installed directly from:
 
-    - **Yarn Installation**: If Yarn is not installed, you can install it globally with the following command:
+https://nodejs.org/
 
-    ```bash
-    npm install -g yarn
-    ```
+### 3. Install dependencies
 
-    - **Switch to correct version**: Switch to yarn latest version
+The project uses Yarn 4 (Berry).
 
-    ```bash
-    yarn set version berry
-    ```
+```bash
+yarn install
+```
 
-3. **Install the necessary dependencies using yarn**
+The repository already contains the Yarn configuration, so there is no need to run `yarn set version berry` after cloning.
 
-    ```bash
-    yarn
-    ```
+### 4. Configure environment variables
 
-    > **_NOTE_** : It is recommended to update all packages to their latest versions by running `yarn upgrade --latest`. If the updated packages introduce breaking changes, you may need to adjust the base template accordingly.
+Create a `.env` file in the project root.
 
-4. **Run the Development Server**
+Example:
 
-    ```bash
-    yarn dev
-    ```
+```env
+PORT=3000
+```
 
-    The app will typically be available at http://localhost:3000, but check the terminal output for the exact URL.
+Refer to `.env.template` for the available environment variables.
 
-    > **_NOTE:_** : If you want to change the server's port number, you can do so by creating a **.env file** at the root level of the project and update the PORT field (check **.env.template** for reference)
+### 5. Start the development server
 
-    ```env
-    PORT=<New Port>
-    ```
+```bash
+yarn dev
+```
 
-5. **Format the Code**
+The application will be available at the URL displayed in the terminal.
 
-    ```bash
-    yarn prettier
-    ```
+### 6. Build the application
 
-6. **Lint the Code**
+For a production build:
 
-    ```bash
-    yarn lint
-    ```
+```bash
+yarn build
+```
 
-7. **To Fix Lint errors**
+For a development build:
 
-    ```bash
-    yarn lint:fix
-    ```
+```bash
+yarn build:dev
+```
 
-8. **Build the Project**
+### 7. Preview the production build
 
-    ```bash
-    yarn build
-    ```
-
-    This command will generate the optimized production build in the dist directory.
-
-9. **Development Build**
-
-    ```bash
-    yarn build:dev
-    ```
-
-    This command will generate the build for development environment in the dist directory
-
-10. **Preview the build**
-
-    ```bash
-    yarn preview
-    ```
-
-11. **Setup Husky (If pre-commit hooks are not working)**
-
-    ```bash
-    yarn postinstall
-    ```
+```bash
+yarn preview
+```

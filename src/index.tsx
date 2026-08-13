@@ -11,7 +11,7 @@ createRoot(rootElement).render(
     <StrictMode>
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <h1>Hello World</h1>
+            <h1>Sora</h1>
         </ThemeProvider>
     </StrictMode>,
 );
