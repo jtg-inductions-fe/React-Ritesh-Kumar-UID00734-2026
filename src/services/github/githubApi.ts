@@ -3,7 +3,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { API_ENDPOINTS } from '@constants';
 import { axiosBaseQuery } from '@services/api/axiosBaseQuery';
 
-import { GitHubUserSearchResponse } from './github.types';
+import { GitHubUserDetails, GitHubUserSearchResponse } from './github.types';
 
 export const githubApi = createApi({
     reducerPath: 'githubApi',
@@ -18,7 +18,14 @@ export const githubApi = createApi({
                 },
             }),
         }),
+
+        getUserByUsername: builder.query<GitHubUserDetails, string>({
+            query: (username) => ({
+                url: API_ENDPOINTS.GITHUB.USER_DETAILS(username),
+                method: 'GET',
+            }),
+        }),
     }),
 });
 
-export const { useSearchUsersQuery } = githubApi;
+export const { useSearchUsersQuery, useGetUserByUsernameQuery } = githubApi;
