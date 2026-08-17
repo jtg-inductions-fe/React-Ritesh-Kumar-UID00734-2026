@@ -14,8 +14,7 @@
             "@theme": ["theme/index"],
             "@utils/*": ["utils/*"],
             "@tests/*": ["tests/*"],
-            "@store": ["store/index"],
-            "@types/*": ["types/*"]
+            "@store": ["store/index"]
         }
     }
 }
