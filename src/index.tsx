@@ -1,18 +1,27 @@
 import { StrictMode } from 'react';
 
+import { Provider } from 'react-redux';
+
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
 import { createRoot } from 'react-dom/client';
 
+import { AppContainer } from '@containers/AppContainer/AppContainer';
+import { SearchContainer } from '@containers/SearchContainer/SearchContainer';
+import { store } from '@store';
 import { theme } from '@theme';
 
 const rootElement = document.getElementById('root') as HTMLElement;
 
 createRoot(rootElement).render(
     <StrictMode>
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <h1>Sora</h1>
-        </ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <AppContainer>
+                    <SearchContainer />
+                </AppContainer>
+            </ThemeProvider>
+        </Provider>
     </StrictMode>,
 );
