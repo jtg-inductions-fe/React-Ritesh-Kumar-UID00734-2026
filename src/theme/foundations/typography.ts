@@ -3,7 +3,7 @@ import type {
     TypographyUtils,
 } from '@mui/material/styles/createTypography';
 
-import { HTML_FONT_SIZE } from '@constant';
+import { HTML_FONT_SIZE } from '@constants';
 
 /* Custom px to rem function */
 const typographyUtil: TypographyUtils = {

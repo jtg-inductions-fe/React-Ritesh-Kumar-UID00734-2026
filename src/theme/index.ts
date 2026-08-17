@@ -1,6 +1,6 @@
-import { createTheme } from '@mui/material/styles';
+import { SCALING_FACTOR } from 'constants';
 
-import { SCALING_FACTOR } from '@constant';
+import { createTheme } from '@mui/material/styles';
 
 /* Customized MUI components themes */
 import { components } from './components';

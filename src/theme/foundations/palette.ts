@@ -1,6 +1,6 @@
 import type { PaletteOptions } from '@mui/material/styles';
 
-import { COLORS } from '@constant';
+import { COLORS } from '@constants';
 
 /**
  * Application color palette mapped to MUI's semantic color system.
