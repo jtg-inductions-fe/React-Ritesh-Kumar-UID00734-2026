@@ -57,12 +57,11 @@ export default tseslint.config(
                 'error',
                 {
                     groups: [
-                        // TODO: Update the groups as per the requirement.
                         ['^react$', '^react-dom'],
-                        ['^\\w'],
                         ['^@mui'],
+                        ['^\\w'],
                         [
-                            '^@(?:|assets|components|constant|layout|routes|theme)',
+                            '^@(?:assets|components|constants|containers|features|hooks|pages|routes|services|store|theme|utils)',
                         ],
                         ['^\\./', '^\\.\\./'],
                     ],
