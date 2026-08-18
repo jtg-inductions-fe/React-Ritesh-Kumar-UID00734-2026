@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
 import { AppContainer } from '@containers/AppContainer/AppContainer';
+import { AuthContainer } from '@containers/AuthContainer/AuthContainer';
 import { AppRoutes } from '@routes/AppRoutes';
 import { store } from '@store';
 import { theme } from '@theme';
@@ -20,9 +21,11 @@ createRoot(rootElement).render(
                 <CssBaseline />
 
                 <BrowserRouter>
-                    <AppContainer>
-                        <AppRoutes />
-                    </AppContainer>
+                    <AuthContainer>
+                        <AppContainer>
+                            <AppRoutes />
+                        </AppContainer>
+                    </AuthContainer>
                 </BrowserRouter>
             </ThemeProvider>
         </Provider>

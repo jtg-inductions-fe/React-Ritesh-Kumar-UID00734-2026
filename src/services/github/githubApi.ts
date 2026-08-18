@@ -25,7 +25,22 @@ export const githubApi = createApi({
                 method: 'GET',
             }),
         }),
+
+        getAuthenticatedUser: builder.query<GitHubUserDetails, string>({
+            query: (token) => ({
+                url: API_ENDPOINTS.GITHUB.AUTHENTICATED_USER,
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }),
+        }),
     }),
 });
 
-export const { useSearchUsersQuery, useGetUserByUsernameQuery } = githubApi;
+export const {
+    useSearchUsersQuery,
+    useGetUserByUsernameQuery,
+    useGetAuthenticatedUserQuery,
+    useLazyGetAuthenticatedUserQuery,
+} = githubApi;
