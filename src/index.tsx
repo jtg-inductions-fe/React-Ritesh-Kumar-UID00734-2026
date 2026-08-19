@@ -1,10 +1,9 @@
 import { StrictMode } from 'react';
 
-import { Provider } from 'react-redux';
-
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 
 import { AppContainer } from '@containers/AppContainer/AppContainer';
 import { SearchContainer } from '@containers/SearchContainer/SearchContainer';

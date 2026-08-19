@@ -1,5 +1,6 @@
-import { API_ENDPOINTS } from '@constants';
 import { createApi } from '@reduxjs/toolkit/query/react';
+
+import { API_ENDPOINTS } from '@constants';
 import { axiosBaseQuery } from '@services/api/axiosBaseQuery';
 
 import { GitHubUserSearchResponse } from './github.types';
