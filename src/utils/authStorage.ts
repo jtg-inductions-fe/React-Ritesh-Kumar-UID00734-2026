@@ -24,3 +24,8 @@ export const getStoredUser = (): GitHubUserDetails | null => {
 
 export const getStoredToken = (): string | null =>
     localStorage.getItem(AUTH_TOKEN_KEY);
+
+export const clearAuthData = (): void => {
+    localStorage.removeItem(AUTH_USER_KEY);
+    localStorage.removeItem(AUTH_TOKEN_KEY);
+};

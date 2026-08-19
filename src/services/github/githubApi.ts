@@ -5,6 +5,7 @@ import { axiosBaseQuery } from '@services/api/axiosBaseQuery';
 
 import { GitHubUserDetails, GitHubUserSearchResponse } from './github.types';
 
+
 export const githubApi = createApi({
     reducerPath: 'githubApi',
     baseQuery: axiosBaseQuery(),

@@ -1,5 +1,7 @@
 import type { ReactNode } from 'react';
 
+import { HeaderContainer } from '@containers/HeaderContainer/HeaderContainer';
+
 import { AppContainerRoot } from './AppContainer.styles';
 
 interface AppContainerProps {
@@ -7,5 +9,8 @@ interface AppContainerProps {
 }
 
 export const AppContainer = ({ children }: AppContainerProps) => (
-    <AppContainerRoot>{children}</AppContainerRoot>
+    <AppContainerRoot>
+        <HeaderContainer />
+        {children}
+    </AppContainerRoot>
 );
