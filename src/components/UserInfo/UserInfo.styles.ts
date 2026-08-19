@@ -10,8 +10,6 @@ export const UserInfoRoot = styled('section')(({ theme }) => ({
     backgroundColor: theme.palette.background.paper,
     border: `1px solid ${theme.palette.divider}`,
     borderRadius: theme.shape.borderRadius * 2,
-
-    boxSizing: 'border-box',
 }));
 
 export const UserInfoLoading = styled(UserInfoRoot)({
