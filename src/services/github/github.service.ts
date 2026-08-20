@@ -3,7 +3,8 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { API_ENDPOINTS } from '@constants';
 import { axiosBaseQuery } from '@services/api/axiosBaseQuery';
 
-import { GitHubUserDetails, GitHubUserSearchResponse } from './github.types';
+import type { GitHubUserSearchResponse } from './github.service.types';
+import type { GitHubUserDetails } from './github.service.types';
 
 export const githubApi = createApi({
     reducerPath: 'githubApi',

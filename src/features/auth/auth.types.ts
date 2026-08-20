@@ -1,4 +1,4 @@
-import type { GitHubUserDetails } from '@services/github/github.types';
+import type { GitHubUserDetails } from '@services/github/github.service.types';
 
 export interface AuthState {
     user: GitHubUserDetails | null;
