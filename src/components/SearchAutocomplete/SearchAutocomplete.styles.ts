@@ -1,30 +1,30 @@
 import { Autocomplete, ListItem, Popper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import type { SearchAutocompleteUser } from './SearchAutocomplete.types';
+import type { SearchAutocompleteOption } from './SearchAutocomplete.types';
 
-export const StyledAutocomplete = styled(Autocomplete<SearchAutocompleteUser>)(
-    ({ theme }) => ({
-        width: '100%',
+export const StyledAutocomplete = styled(
+    Autocomplete<SearchAutocompleteOption>,
+)(({ theme }) => ({
+    width: '100%',
 
-        '& .MuiOutlinedInput-root': {
-            backgroundColor: theme.palette.background.paper,
-            borderRadius: theme.shape.borderRadius * 4,
+    '& .MuiOutlinedInput-root': {
+        backgroundColor: theme.palette.background.paper,
+        borderRadius: theme.shape.borderRadius * 4,
 
-            '& fieldset': {
-                borderColor: theme.palette.divider,
-            },
-
-            '&:hover fieldset': {
-                borderColor: theme.palette.primary.main,
-            },
-
-            '&.Mui-focused fieldset': {
-                borderColor: theme.palette.primary.main,
-            },
+        '& fieldset': {
+            borderColor: theme.palette.divider,
         },
-    }),
-);
+
+        '&:hover fieldset': {
+            borderColor: theme.palette.primary.main,
+        },
+
+        '&.Mui-focused fieldset': {
+            borderColor: theme.palette.primary.main,
+        },
+    },
+}));
 
 export const StyledPopper = styled(Popper)(({ theme }) => ({
     '& .MuiAutocomplete-paper': {
