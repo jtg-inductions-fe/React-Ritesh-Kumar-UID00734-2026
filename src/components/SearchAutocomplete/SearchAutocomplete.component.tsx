@@ -26,7 +26,7 @@ export const SearchAutocomplete = ({
         inputValue={value}
         open={open}
         noOptionsText="No users found"
-        getOptionLabel={(option) => option.label}
+        getOptionLabel={(option) => option.login}
         isOptionEqualToValue={(option, selectedOption) =>
             option.id === selectedOption.id
         }
@@ -40,9 +40,9 @@ export const SearchAutocomplete = ({
         }}
         renderOption={(props, option) => (
             <StyledOption {...props} key={option.id}>
-                <Avatar src={option.avatarUrl} alt={option.label} />
+                <Avatar src={option.avatar_url} alt={option.login} />
 
-                <Typography variant="body1">{option.label}</Typography>
+                <Typography variant="body1">{option.login}</Typography>
             </StyledOption>
         )}
         renderInput={(params) => (
@@ -55,11 +55,9 @@ export const SearchAutocomplete = ({
                         ...params.InputProps,
                         endAdornment: (
                             <>
-                                {loading ? (
-                                    <CircularProgress size={20} />
-                                ) : (
-                                    <SearchIcon />
-                                )}
+                                {loading && <CircularProgress size={20} />}
+
+                                {!loading && <SearchIcon />}
 
                                 {params.InputProps.endAdornment}
                             </>

@@ -1,8 +1,9 @@
-export interface SearchAutocompleteOption {
-    id: number;
-    label: string;
-    avatarUrl: string;
-}
+import type { GitHubUserSearchItem } from '@services/github/github.service.types';
+
+export type SearchAutocompleteOption = Pick<
+    GitHubUserSearchItem,
+    'id' | 'login' | 'avatar_url'
+>;
 
 export interface SearchAutocompleteProps {
     value: string;
@@ -16,9 +17,9 @@ export interface SearchAutocompleteProps {
     ) => void;
     onChange: (
         event: React.SyntheticEvent,
-        value: SearchAutocompleteOption | null,
+        option: SearchAutocompleteOption | null,
     ) => void;
     onOpen: () => void;
     onClose: () => void;
-    onKeyDown: React.KeyboardEventHandler<HTMLDivElement>;
+    onKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 }

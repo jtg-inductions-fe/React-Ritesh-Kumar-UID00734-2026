@@ -58,28 +58,31 @@ export const SearchContainer = () => {
         }
     }, [searchError, userError]);
 
-    const options: SearchAutocompleteOption[] = (
-        isDebouncing ? [] : (searchData?.items ?? [])
-    ).map((searchUser) => ({
-        id: searchUser.id,
-        label: searchUser.login,
-        avatarUrl: searchUser.avatar_url,
-    }));
+    const options: SearchAutocompleteOption[] = isDebouncing
+        ? []
+        : (searchData?.items ?? []);
 
     const handleInputChange = (
         _: React.SyntheticEvent,
         value: string,
         reason: string,
     ) => {
-        if (reason === 'selectOption' || reason === 'reset') {
+        if (
+            reason === 'selectOption' ||
+            reason === 'reset' ||
+            reason === 'blur'
+        ) {
             return;
         }
 
         setQuery(value);
         setSearchQuery(value);
-        setIsAutocompleteOpen(value.trim().length > 0);
 
-        if (!value.trim()) {
+        const hasQuery = value.trim().length > 0;
+
+        setIsAutocompleteOpen(hasQuery);
+
+        if (!hasQuery) {
             setSelectedUsername('');
             setSearchParams({});
         }
@@ -93,7 +96,7 @@ export const SearchContainer = () => {
             return;
         }
 
-        const normalizedUsername = option.label.trim();
+        const normalizedUsername = option.login.trim();
 
         if (!normalizedUsername) {
             return;
@@ -102,6 +105,7 @@ export const SearchContainer = () => {
         setQuery(normalizedUsername);
         setSelectedUsername(normalizedUsername);
         setIsAutocompleteOpen(false);
+
         setSearchParams({
             user: normalizedUsername,
         });
@@ -130,6 +134,7 @@ export const SearchContainer = () => {
 
         setIsAutocompleteOpen(false);
         setSelectedUsername(normalizedUsername);
+
         setSearchParams({
             user: normalizedUsername,
         });
