@@ -1,24 +1,12 @@
 import type { BaseQueryFn } from '@reduxjs/toolkit/query';
-import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
+import type { AxiosError, AxiosResponse } from 'axios';
 
 import { githubClient } from './axios';
-
-type AxiosBaseQueryArgs = {
-    url: string;
-    method?: AxiosRequestConfig['method'];
-    params?: Record<string, string | number | boolean | undefined>;
-    data?: unknown;
-    headers?: AxiosRequestConfig['headers'];
-};
-
-type AxiosBaseQueryError = {
-    status?: number;
-    data?: unknown;
-};
+import type { AxiosBaseQueryArgs, AxiosBaseQueryError } from './axios.types';
 
 export const axiosBaseQuery =
     (): BaseQueryFn<AxiosBaseQueryArgs, unknown, AxiosBaseQueryError> =>
-    async ({ url, method, params, data, headers }) => {
+    async ({ url, method, params, data, headers }, { signal }) => {
         try {
             const response: AxiosResponse<unknown> = await githubClient({
                 url,
@@ -26,6 +14,7 @@ export const axiosBaseQuery =
                 params,
                 data,
                 headers,
+                signal,
             });
 
             return {
@@ -36,7 +25,7 @@ export const axiosBaseQuery =
 
             return {
                 error: {
-                    status: axiosError.response?.status,
+                    status: axiosError.response?.status ?? 500,
                     data: axiosError.response?.data ?? axiosError.message,
                 },
             };

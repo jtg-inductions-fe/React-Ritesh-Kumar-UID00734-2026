@@ -1,13 +1,13 @@
 import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
-import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
 
-import { AppContainer } from '@containers/AppContainer/AppContainer';
-import { AppRoutes } from '@routes/AppRoutes';
+import { AppLayout } from '@layouts/App/App.layout';
+import { appRouter } from '@routes/App.route';
 import { store } from '@store';
 import { theme } from '@theme';
 
@@ -19,11 +19,9 @@ createRoot(rootElement).render(
             <ThemeProvider theme={theme}>
                 <CssBaseline />
 
-                <BrowserRouter>
-                    <AppContainer>
-                        <AppRoutes />
-                    </AppContainer>
-                </BrowserRouter>
+                <AppLayout>
+                    <RouterProvider router={appRouter} />
+                </AppLayout>
             </ThemeProvider>
         </Provider>
     </StrictMode>,
