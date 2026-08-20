@@ -1,9 +1,9 @@
 import { Autocomplete, ListItem, Popper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import type { GitHubUser } from '@services/github/github.types';
+import type { SearchAutocompleteUser } from './SearchAutocomplete.types';
 
-export const StyledAutocomplete = styled(Autocomplete<GitHubUser>)(
+export const StyledAutocomplete = styled(Autocomplete<SearchAutocompleteUser>)(
     ({ theme }) => ({
         width: '100%',
 
@@ -36,7 +36,7 @@ export const StyledPopper = styled(Popper)(({ theme }) => ({
     },
 
     '& .MuiAutocomplete-listbox': {
-        maxHeight: 600,
+        maxHeight: theme.spacing(150),
         padding: theme.spacing(1),
     },
 }));
@@ -59,7 +59,7 @@ export const StyledOption = styled(ListItem)(({ theme }) => ({
     },
 
     '& .MuiAvatar-root': {
-        width: 40,
-        height: 40,
+        width: theme.spacing(10),
+        height: theme.spacing(10),
     },
 }));

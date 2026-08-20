@@ -8,6 +8,7 @@
             "@containers/*": ["containers/*"],
             "@features/*": ["features/*"],
             "@hooks/*": ["hooks/*"],
+            "@layouts/*": ["layouts/*"],
             "@pages/*": ["pages/*"],
             "@routes/*": ["routes/*"],
             "@services/*": ["services/*"],

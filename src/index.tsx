@@ -5,8 +5,8 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 
 import { Provider } from 'react-redux';
 
-import { AppContainer } from '@containers/AppContainer/AppContainer';
-import { SearchContainer } from '@containers/SearchContainer/SearchContainer';
+import { SearchContainer } from '@containers/Search/Search.container';
+import { AppLayout } from '@layouts/App/App.layout';
 import { store } from '@store';
 import { theme } from '@theme';
 
@@ -17,9 +17,9 @@ createRoot(rootElement).render(
         <Provider store={store}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <AppContainer>
+                <AppLayout>
                     <SearchContainer />
-                </AppContainer>
+                </AppLayout>
             </ThemeProvider>
         </Provider>
     </StrictMode>,
