@@ -1,36 +1,19 @@
 import { useState } from 'react';
 
-import { Alert, Button, Snackbar, Typography } from '@mui/material';
-
 import {
-    LoginActions,
-    LoginForm,
-    LoginHeader,
-    LoginPageRoot,
-    LoginRoot,
-    LoginTextField,
-} from './Login.styles';
+    Box,
+    Button,
+    CircularProgress,
+    Stack,
+    TextField,
+    Typography,
+} from '@mui/material';
 
-interface LoginFormValues {
-    username: string;
-    token: string;
-}
+import type { LoginErrors, LoginProps } from './Login.types';
 
-interface LoginProps {
-    loading?: boolean;
-    error?: string;
-    onSubmit: (values: LoginFormValues) => Promise<void> | void;
-}
-
-interface LoginErrors {
-    username?: string;
-    token?: string;
-}
-
-export const Login = ({ loading = false, error, onSubmit }: LoginProps) => {
+export const Login = ({ loading = false, onSubmit }: LoginProps) => {
     const [username, setUsername] = useState('');
     const [token, setToken] = useState('');
-
     const [errors, setErrors] = useState<LoginErrors>({});
 
     const validate = (): LoginErrors => {
@@ -41,9 +24,6 @@ export const Login = ({ loading = false, error, onSubmit }: LoginProps) => {
 
         if (!trimmedUsername) {
             validationErrors.username = 'Username is required.';
-        } else if (trimmedUsername.length < 3) {
-            validationErrors.username =
-                'Username must be at least 3 characters.';
         }
 
         if (!trimmedToken) {
@@ -64,14 +44,10 @@ export const Login = ({ loading = false, error, onSubmit }: LoginProps) => {
             return;
         }
 
-        const result = onSubmit({
+        void onSubmit({
             username: username.trim(),
             token: token.trim(),
         });
-
-        if (result instanceof Promise) {
-            result.catch(() => {});
-        }
     };
 
     const handleUsernameChange = (
@@ -103,19 +79,41 @@ export const Login = ({ loading = false, error, onSubmit }: LoginProps) => {
     };
 
     return (
-        <LoginPageRoot>
-            <LoginRoot>
-                <LoginHeader>
+        <Box
+            component="section"
+            width="100%"
+            minHeight="100vh"
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            padding={3}
+        >
+            <Stack
+                width="100%"
+                maxWidth="sm"
+                padding={6}
+                gap={3}
+                bgcolor="background.paper"
+                border={1}
+                borderColor="divider"
+                borderRadius={2}
+            >
+                <Stack gap={1}>
                     <Typography variant="h4">Login</Typography>
 
                     <Typography variant="body2" color="text.secondary">
                         Sign in using your GitHub username and personal access
                         token.
                     </Typography>
-                </LoginHeader>
+                </Stack>
 
-                <LoginForm onSubmit={handleSubmit} noValidate>
-                    <LoginTextField
+                <Stack
+                    component="form"
+                    gap={3}
+                    onSubmit={handleSubmit}
+                    noValidate
+                >
+                    <TextField
                         label="GitHub Username"
                         placeholder="Enter your GitHub username"
                         value={username}
@@ -126,7 +124,7 @@ export const Login = ({ loading = false, error, onSubmit }: LoginProps) => {
                         autoComplete="username"
                     />
 
-                    <LoginTextField
+                    <TextField
                         label="Personal Access Token"
                         placeholder="Enter your GitHub personal access token"
                         type="password"
@@ -138,30 +136,25 @@ export const Login = ({ loading = false, error, onSubmit }: LoginProps) => {
                         autoComplete="current-password"
                     />
 
-                    <LoginActions>
+                    <Stack alignItems="flex-end">
                         <Button
                             type="submit"
                             variant="contained"
                             disabled={loading}
+                            startIcon={
+                                loading ? (
+                                    <CircularProgress
+                                        size={18}
+                                        color="inherit"
+                                    />
+                                ) : undefined
+                            }
                         >
                             {loading ? 'Logging in...' : 'Login'}
                         </Button>
-                    </LoginActions>
-                </LoginForm>
-            </LoginRoot>
-
-            <Snackbar
-                open={Boolean(error)}
-                autoHideDuration={4000}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-            >
-                <Alert severity="error" variant="filled">
-                    {error}
-                </Alert>
-            </Snackbar>
-        </LoginPageRoot>
+                    </Stack>
+                </Stack>
+            </Stack>
+        </Box>
     );
 };

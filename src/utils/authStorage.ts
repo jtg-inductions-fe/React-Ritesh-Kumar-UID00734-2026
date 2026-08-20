@@ -1,4 +1,4 @@
-import type { GitHubUserDetails } from '@services/github/github.types';
+import type { GitHubUserDetails } from '@services/github/github.service.types';
 
 const AUTH_USER_KEY = 'github_user';
 const AUTH_TOKEN_KEY = 'github_token';

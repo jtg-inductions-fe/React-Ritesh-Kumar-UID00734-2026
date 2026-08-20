@@ -8,7 +8,7 @@ export const GuestRoute = () => {
     );
 
     if (isAuthenticated) {
-        return <Navigate to="/search" replace />;
+        return <Navigate to="/" replace />;
     }
 
     return <Outlet />;

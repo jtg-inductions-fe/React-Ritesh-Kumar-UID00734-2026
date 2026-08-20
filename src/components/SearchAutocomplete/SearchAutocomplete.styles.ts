@@ -1,30 +1,30 @@
 import { Autocomplete, ListItem, Popper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import type { GitHubUser } from '@services/github/github.types';
+import type { SearchAutocompleteOption } from './SearchAutocomplete.types';
 
-export const StyledAutocomplete = styled(Autocomplete<GitHubUser>)(
-    ({ theme }) => ({
-        width: '100%',
+export const StyledAutocomplete = styled(
+    Autocomplete<SearchAutocompleteOption>,
+)(({ theme }) => ({
+    width: '100%',
 
-        '& .MuiOutlinedInput-root': {
-            backgroundColor: theme.palette.background.paper,
-            borderRadius: theme.shape.borderRadius * 4,
+    '& .MuiOutlinedInput-root': {
+        backgroundColor: theme.palette.background.paper,
+        borderRadius: theme.shape.borderRadius * 4,
 
-            '& fieldset': {
-                borderColor: theme.palette.divider,
-            },
-
-            '&:hover fieldset': {
-                borderColor: theme.palette.primary.main,
-            },
-
-            '&.Mui-focused fieldset': {
-                borderColor: theme.palette.primary.main,
-            },
+        '& fieldset': {
+            borderColor: theme.palette.divider,
         },
-    }),
-);
+
+        '&:hover fieldset': {
+            borderColor: theme.palette.primary.main,
+        },
+
+        '&.Mui-focused fieldset': {
+            borderColor: theme.palette.primary.main,
+        },
+    },
+}));
 
 export const StyledPopper = styled(Popper)(({ theme }) => ({
     '& .MuiAutocomplete-paper': {
@@ -36,7 +36,7 @@ export const StyledPopper = styled(Popper)(({ theme }) => ({
     },
 
     '& .MuiAutocomplete-listbox': {
-        maxHeight: 600,
+        maxHeight: theme.spacing(150),
         padding: theme.spacing(1),
     },
 }));
@@ -59,7 +59,7 @@ export const StyledOption = styled(ListItem)(({ theme }) => ({
     },
 
     '& .MuiAvatar-root': {
-        width: 40,
-        height: 40,
+        width: theme.spacing(10),
+        height: theme.spacing(10),
     },
 }));

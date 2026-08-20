@@ -1,26 +1,14 @@
 import { Close, Logout, Person } from '@mui/icons-material';
-import { Button, IconButton, Typography } from '@mui/material';
-
 import {
-    UserMenuActions,
-    UserMenuAvatar,
-    UserMenuContent,
-    UserMenuHeader,
-    UserMenuInfo,
-    UserMenuRoot,
-} from './UserMenu.styles';
+    Avatar,
+    Box,
+    Button,
+    IconButton,
+    Popover,
+    Typography,
+} from '@mui/material';
 
-interface UserMenuProps {
-    anchorEl: HTMLElement | null;
-    open: boolean;
-    username: string;
-    name?: string | null;
-    email?: string | null;
-    avatarUrl?: string;
-    onClose: () => void;
-    onViewProfile: () => void;
-    onLogout: () => void;
-}
+import type { UserMenuProps } from './UserMenu.types';
 
 export const UserMenu = ({
     anchorEl,
@@ -44,10 +32,11 @@ export const UserMenu = ({
     };
 
     return (
-        <UserMenuRoot
+        <Popover
             open={open}
             anchorEl={anchorEl}
             onClose={onClose}
+            elevation={0}
             anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'right',
@@ -56,18 +45,46 @@ export const UserMenu = ({
                 vertical: 'top',
                 horizontal: 'right',
             }}
+            slotProps={{
+                paper: {
+                    style: {
+                        backgroundColor: 'transparent',
+                        boxShadow: 'none',
+                    },
+                },
+            }}
         >
-            <UserMenuContent>
-                <UserMenuHeader>
+            <Box
+                width={320}
+                marginTop={4}
+                bgcolor="background.default"
+                border={1}
+                borderColor="divider"
+                borderRadius={2}
+                overflow="hidden"
+                padding={3}
+            >
+                <Box display="flex" justifyContent="flex-end">
                     <IconButton size="small" onClick={onClose}>
                         <Close fontSize="small" />
                     </IconButton>
-                </UserMenuHeader>
+                </Box>
 
-                <UserMenuInfo>
-                    <UserMenuAvatar
+                <Box
+                    display="flex"
+                    flexDirection="column"
+                    alignItems="center"
+                    gap={1}
+                    textAlign="center"
+                    overflow="hidden"
+                >
+                    <Avatar
                         src={avatarUrl}
                         alt={`${username}'s profile`}
+                        sx={{
+                            width: 64,
+                            height: 64,
+                        }}
                     />
 
                     <Typography variant="subtitle1" fontWeight={600}>
@@ -85,9 +102,14 @@ export const UserMenu = ({
                             {email}
                         </Typography>
                     )}
-                </UserMenuInfo>
+                </Box>
 
-                <UserMenuActions>
+                <Box
+                    display="flex"
+                    flexDirection="column"
+                    gap={1}
+                    marginTop={2}
+                >
                     <Button
                         fullWidth
                         variant="outlined"
@@ -105,8 +127,8 @@ export const UserMenu = ({
                     >
                         Logout
                     </Button>
-                </UserMenuActions>
-            </UserMenuContent>
-        </UserMenuRoot>
+                </Box>
+            </Box>
+        </Popover>
     );
 };

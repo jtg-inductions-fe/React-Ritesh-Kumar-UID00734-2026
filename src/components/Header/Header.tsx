@@ -1,55 +1,22 @@
 import { useState } from 'react';
 
-import { Avatar, Button, IconButton, Typography } from '@mui/material';
-
-import { useNavigate } from 'react-router-dom';
+import { Avatar, Box, Button, IconButton, Typography } from '@mui/material';
 
 import logo from '@assets/images/logo.svg';
 
-import {
-    HeaderActions,
-    HeaderAppBar,
-    HeaderBrandButton,
-    HeaderBrandText,
-    HeaderLogo,
-    HeaderRoot,
-} from './Header.styles';
+import { HeaderAppBar } from './Header.styles';
+import type { HeaderProps } from './Header.types';
 import { UserMenu } from './UserMenu/UserMenu';
 
-interface HeaderUser {
-    username: string;
-    name?: string | null;
-    email?: string | null;
-    avatarUrl?: string;
-}
-
-interface HeaderProps {
-    variant: 'login' | 'app';
-    isAuthenticated: boolean;
-    user?: HeaderUser;
-    onLogin: () => void;
-    onViewProfile: () => void;
-    onLogout: () => void;
-}
-
 export const Header = ({
-    variant,
     isAuthenticated,
     user,
+    onBrandClick,
     onLogin,
     onViewProfile,
     onLogout,
 }: HeaderProps) => {
-    const navigate = useNavigate();
-
     const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-
-    const isMenuOpen = Boolean(anchorEl);
-    const showActions = variant === 'app';
-
-    const handleBrandClick = () => {
-        void navigate('/search');
-    };
 
     const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -60,61 +27,71 @@ export const Header = ({
     };
 
     return (
-        <HeaderRoot>
-            <HeaderAppBar position="static">
-                <HeaderBrandButton type="button" onClick={handleBrandClick}>
-                    <HeaderLogo src={logo} alt="" />
+        <HeaderAppBar position="static">
+            <Box
+                component="button"
+                type="button"
+                display="flex"
+                alignItems="center"
+                gap={2}
+                border={0}
+                bgcolor="transparent"
+                color="inherit"
+                textAlign="left"
+                onClick={onBrandClick}
+            >
+                <Box
+                    component="img"
+                    src={logo}
+                    alt=""
+                    width={36}
+                    height={36}
+                    display="block"
+                />
 
-                    <HeaderBrandText>
-                        <Typography
-                            variant="h6"
-                            component="span"
-                            fontWeight={700}
-                        >
-                            Sora
-                        </Typography>
+                <Box
+                    display="flex"
+                    flexDirection="column"
+                    justifyContent="center"
+                    gap={1}
+                >
+                    <Typography variant="h6" component="span" fontWeight={700}>
+                        Sora
+                    </Typography>
 
-                        <Typography
-                            variant="caption"
-                            component="span"
-                            color="text.secondary"
-                        >
-                            Explore the GitHub Community
-                        </Typography>
-                    </HeaderBrandText>
-                </HeaderBrandButton>
+                    <Typography
+                        variant="caption"
+                        component="span"
+                        color="text.secondary"
+                    >
+                        Explore the GitHub Community
+                    </Typography>
+                </Box>
+            </Box>
 
-                {showActions && (
-                    <HeaderActions>
-                        {isAuthenticated ? (
-                            <IconButton onClick={handleAvatarClick}>
-                                <Avatar
-                                    src={user?.avatarUrl}
-                                    alt={user?.username}
-                                />
-                            </IconButton>
-                        ) : (
-                            <Button variant="contained" onClick={onLogin}>
-                                Login
-                            </Button>
-                        )}
-                    </HeaderActions>
-                )}
-            </HeaderAppBar>
+            {isAuthenticated ? (
+                <IconButton onClick={handleAvatarClick}>
+                    <Avatar src={user?.avatar_url} alt={user?.login} />
+                </IconButton>
+            ) : (
+                <Button variant="contained" onClick={onLogin}>
+                    Login
+                </Button>
+            )}
 
             {isAuthenticated && user && (
                 <UserMenu
                     anchorEl={anchorEl}
-                    open={isMenuOpen}
-                    username={user.username}
+                    open={Boolean(anchorEl)}
+                    username={user.login}
                     name={user.name}
                     email={user.email}
-                    avatarUrl={user.avatarUrl}
+                    avatarUrl={user.avatar_url}
                     onClose={handleMenuClose}
                     onViewProfile={onViewProfile}
                     onLogout={onLogout}
                 />
             )}
-        </HeaderRoot>
+        </HeaderAppBar>
     );
 };

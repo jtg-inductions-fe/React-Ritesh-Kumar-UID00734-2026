@@ -1,17 +1,15 @@
 import { useState } from 'react';
 
+import { Alert, Snackbar } from '@mui/material';
+
 import { useNavigate } from 'react-router-dom';
 
 import { Login } from '@components/Login/Login';
+import type { LoginFormValues } from '@components/Login/Login.types';
 import { setCredentials } from '@features/auth/authSlice';
-import { useLazyGetAuthenticatedUserQuery } from '@services/github/githubApi';
+import { useLazyGetAuthenticatedUserQuery } from '@services/github/github.service';
 import { useAppDispatch } from '@store';
 import { saveAuthData } from '@utils/authStorage';
-
-interface LoginFormValues {
-    username: string;
-    token: string;
-}
 
 export const LoginContainer = () => {
     const navigate = useNavigate();
@@ -55,6 +53,22 @@ export const LoginContainer = () => {
     };
 
     return (
-        <Login loading={isLoading} error={loginError} onSubmit={handleLogin} />
+        <>
+            <Login loading={isLoading} onSubmit={handleLogin} />
+
+            <Snackbar
+                open={Boolean(loginError)}
+                autoHideDuration={4000}
+                onClose={() => setLoginError(undefined)}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+            >
+                <Alert severity="error" variant="filled">
+                    {loginError}
+                </Alert>
+            </Snackbar>
+        </>
     );
 };

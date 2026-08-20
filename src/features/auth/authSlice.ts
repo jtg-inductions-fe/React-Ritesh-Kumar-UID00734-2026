@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import type { GitHubUserDetails } from '@services/github/github.types';
+import type { GitHubUserDetails } from '@services/github/github.service.types';
 
 import type { AuthState } from './auth.types';
 
