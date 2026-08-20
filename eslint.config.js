@@ -57,7 +57,7 @@ export default tseslint.config(
                 'error',
                 {
                     groups: [
-                        ['^react$', '^react-dom(?:/|$)'],
+                        ['^react(?:/|$)', '^react-dom(?:/|$)'],
                         ['^@mui/'],
                         ['^@?\\w'],
                         [

@@ -9,6 +9,8 @@ import { COLORS } from '@constants';
  * This file maps those tokens to the structure expected by MUI.
  */
 export const palette: PaletteOptions = {
+    mode: 'dark',
+
     primary: {
         main: COLORS.PRIMARY.MAIN,
         light: COLORS.PRIMARY.LIGHT,
