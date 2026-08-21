@@ -10,9 +10,11 @@ import { UserMenu } from './UserMenu/UserMenu';
 
 export const Header = ({
     isAuthenticated,
+    isLoginPage,
     user,
     onBrandClick,
     onLogin,
+    onHome,
     onViewProfile,
     onLogout,
 }: HeaderProps) => {
@@ -43,7 +45,7 @@ export const Header = ({
                 <Box
                     component="img"
                     src={logo}
-                    alt=""
+                    alt="Sora"
                     width={36}
                     height={36}
                     display="block"
@@ -73,6 +75,10 @@ export const Header = ({
                 <IconButton onClick={handleAvatarClick}>
                     <Avatar src={user?.avatar_url} alt={user?.login} />
                 </IconButton>
+            ) : isLoginPage ? (
+                <Button variant="contained" onClick={onHome}>
+                    Home
+                </Button>
             ) : (
                 <Button variant="contained" onClick={onLogin}>
                     Login

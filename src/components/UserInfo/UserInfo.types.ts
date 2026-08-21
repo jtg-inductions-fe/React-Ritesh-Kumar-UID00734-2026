@@ -1,18 +1,20 @@
-export interface UserDetails {
-    id: number;
-    login: string;
-    avatar_url: string;
-    html_url: string;
-    name: string | null;
-    location: string | null;
-    bio: string | null;
-    blog: string;
-    email: string | null;
-    followers: number;
-    following: number;
-}
+import type { GitHubUserDetails } from '@services/github/github.service.types';
 
 export interface UserInfoProps {
-    details?: UserDetails;
+    details?: Pick<
+        GitHubUserDetails,
+        | 'id'
+        | 'login'
+        | 'avatar_url'
+        | 'html_url'
+        | 'name'
+        | 'location'
+        | 'bio'
+        | 'blog'
+        | 'email'
+        | 'followers'
+        | 'following'
+    >;
     loading: boolean;
+    showFollowButton: boolean;
 }

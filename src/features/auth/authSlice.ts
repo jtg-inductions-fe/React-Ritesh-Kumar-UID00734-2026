@@ -1,19 +1,12 @@
 import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
-import type { GitHubUserDetails } from '@services/github/github.service.types';
-
-import type { AuthState } from './auth.types';
+import type { AuthState, SetCredentialsPayload } from './auth.types';
 
 const initialState: AuthState = {
     user: null,
     token: null,
     isAuthenticated: false,
 };
-
-interface SetCredentialsPayload {
-    user: GitHubUserDetails;
-    token: string;
-}
 
 const authSlice = createSlice({
     name: 'auth',
