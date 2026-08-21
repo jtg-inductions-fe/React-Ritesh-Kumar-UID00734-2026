@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Header } from '@components/Header/Header';
 import { clearCredentials } from '@features/auth/authSlice';
@@ -7,6 +7,7 @@ import { clearAuthData } from '@utils/authStorage';
 
 export const HeaderLayout = () => {
     const navigate = useNavigate();
+    const location = useLocation();
     const dispatch = useAppDispatch();
 
     const user = useAppSelector((state) => state.auth.user);
@@ -14,12 +15,18 @@ export const HeaderLayout = () => {
         (state) => state.auth.isAuthenticated,
     );
 
+    const isLoginPage = location.pathname === '/login';
+
     const handleBrandClick = () => {
         void navigate('/');
     };
 
     const handleLogin = () => {
         void navigate('/login');
+    };
+
+    const handleHome = () => {
+        void navigate('/');
     };
 
     const handleViewProfile = () => {
@@ -36,9 +43,11 @@ export const HeaderLayout = () => {
     return (
         <Header
             isAuthenticated={isAuthenticated}
+            isLoginPage={isLoginPage}
             user={user}
             onBrandClick={handleBrandClick}
             onLogin={handleLogin}
+            onHome={handleHome}
             onViewProfile={handleViewProfile}
             onLogout={handleLogout}
         />

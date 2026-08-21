@@ -82,7 +82,7 @@ export const Login = ({ loading = false, onSubmit }: LoginProps) => {
         <Box
             component="section"
             width="100%"
-            minHeight="100vh"
+            minHeight="90vh"
             display="flex"
             alignItems="center"
             justifyContent="center"
