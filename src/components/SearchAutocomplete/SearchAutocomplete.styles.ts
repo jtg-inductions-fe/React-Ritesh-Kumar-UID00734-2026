@@ -36,7 +36,7 @@ export const StyledPopper = styled(Popper)(({ theme }) => ({
     },
 
     '& .MuiAutocomplete-listbox': {
-        maxHeight: theme.spacing(150),
+        maxHeight: theme.spacing(120),
         padding: theme.spacing(1),
     },
 }));
