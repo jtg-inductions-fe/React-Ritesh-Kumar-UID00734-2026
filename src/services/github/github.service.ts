@@ -3,7 +3,10 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { API_ENDPOINTS } from '@constants';
 import { axiosBaseQuery } from '@services/api/axiosBaseQuery';
 
-import type { GitHubUserSearchResponse } from './github.service.types';
+import type {
+    GitHubAuthenticatedUser,
+    GitHubUserSearchResponse,
+} from './github.service.types';
 import type { GitHubUserDetails } from './github.service.types';
 
 export const githubApi = createApi({
@@ -27,7 +30,7 @@ export const githubApi = createApi({
             }),
         }),
 
-        getAuthenticatedUser: builder.query<GitHubUserDetails, string>({
+        getAuthenticatedUser: builder.query<GitHubAuthenticatedUser, string>({
             query: (token) => ({
                 url: API_ENDPOINTS.GITHUB.AUTHENTICATED_USER,
                 method: 'GET',
