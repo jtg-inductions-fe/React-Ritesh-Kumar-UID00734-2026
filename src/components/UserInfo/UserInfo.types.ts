@@ -15,4 +15,5 @@ export interface UserDetails {
 export interface UserInfoProps {
     details?: UserDetails;
     loading: boolean;
+    showFollowButton?: boolean;
 }

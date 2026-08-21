@@ -18,7 +18,11 @@ import {
 
 import type { UserInfoProps } from './UserInfo.types';
 
-export const UserInfo = ({ details, loading }: UserInfoProps) => {
+export const UserInfo = ({
+    details,
+    loading,
+    showFollowButton,
+}: UserInfoProps) => {
     if (loading) {
         return (
             <Stack
@@ -107,9 +111,11 @@ export const UserInfo = ({ details, loading }: UserInfoProps) => {
                         )}
                     </Stack>
 
-                    <Button variant="contained" size="large" fullWidth>
-                        Follow
-                    </Button>
+                    {showFollowButton && (
+                        <Button variant="contained" size="large" fullWidth>
+                            Follow
+                        </Button>
+                    )}
                 </Stack>
 
                 <Divider orientation="vertical" flexItem />

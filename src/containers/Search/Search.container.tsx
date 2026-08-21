@@ -165,6 +165,7 @@ export const SearchContainer = () => {
             <UserInfo
                 details={userDetails}
                 loading={isUserLoading || isUserFetching}
+                showFollowButton={true}
             />
 
             <Snackbar
