@@ -9,39 +9,40 @@ import {
 import type { SearchAutocompleteProps } from './SearchAutocomplete.types';
 
 export const SearchAutocomplete = ({
-    query,
-    users,
+    value,
+    options,
     loading,
-    onQueryChange,
+    open,
+    onInputChange,
+    onChange,
+    onOpen,
+    onClose,
+    onKeyDown,
 }: SearchAutocompleteProps) => (
     <StyledAutocomplete
-        options={users}
+        options={options}
         forcePopupIcon={false}
         loading={loading}
-        inputValue={query}
-        open={query.trim().length >= 1}
+        inputValue={value}
+        open={open}
         noOptionsText="No users found"
         getOptionLabel={(option) => option.login}
-        isOptionEqualToValue={(option, value) => option.id === value.id}
-        onInputChange={(_, value, reason) => {
-            if (
-                reason === 'selectOption' ||
-                reason === 'reset' ||
-                reason === 'blur'
-            ) {
-                return;
-            }
-
-            onQueryChange(value);
-        }}
+        isOptionEqualToValue={(option, selectedOption) =>
+            option.id === selectedOption.id
+        }
+        onInputChange={onInputChange}
+        onChange={onChange}
+        onOpen={onOpen}
+        onClose={onClose}
+        onKeyDown={onKeyDown}
         slots={{
             popper: StyledPopper,
         }}
-        renderOption={(props, user) => (
-            <StyledOption {...props} key={user.id}>
-                <Avatar src={user.avatar_url} alt={user.login} />
+        renderOption={(props, option) => (
+            <StyledOption {...props} key={option.id}>
+                <Avatar src={option.avatar_url} alt={option.login} />
 
-                <Typography variant="body1">{user.login}</Typography>
+                <Typography variant="body1">{option.login}</Typography>
             </StyledOption>
         )}
         renderInput={(params) => (
@@ -54,11 +55,9 @@ export const SearchAutocomplete = ({
                         ...params.InputProps,
                         endAdornment: (
                             <>
-                                {loading ? (
-                                    <CircularProgress size={20} />
-                                ) : (
-                                    <SearchIcon />
-                                )}
+                                {loading && <CircularProgress size={20} />}
+
+                                {!loading && <SearchIcon />}
 
                                 {params.InputProps.endAdornment}
                             </>
