@@ -1,12 +1,10 @@
-import { type ReactNode, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { setCredentials } from '@features/auth/authSlice';
 import { useAppDispatch } from '@store';
 import { getStoredToken, getStoredUser } from '@utils/authStorage';
 
-interface AuthContainerProps {
-    children: ReactNode;
-}
+import type { AuthContainerProps } from './Auth.types';
 
 export const AuthContainer = ({ children }: AuthContainerProps) => {
     const dispatch = useAppDispatch();
