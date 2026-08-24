@@ -22,6 +22,9 @@ export const UserInfo = ({
     details,
     loading,
     showFollowButton,
+    isFollowing,
+    isFollowLoading,
+    onFollow,
 }: UserInfoProps) => {
     if (loading) {
         return (
@@ -112,8 +115,20 @@ export const UserInfo = ({
                     </Stack>
 
                     {showFollowButton && (
-                        <Button variant="contained" size="large" fullWidth>
-                            Follow
+                        <Button
+                            variant="contained"
+                            size="large"
+                            fullWidth
+                            disabled={isFollowing || isFollowLoading}
+                            onClick={onFollow}
+                        >
+                            {isFollowLoading ? (
+                                <CircularProgress size={24} color="inherit" />
+                            ) : isFollowing ? (
+                                'Following'
+                            ) : (
+                                'Follow'
+                            )}
                         </Button>
                     )}
                 </Stack>

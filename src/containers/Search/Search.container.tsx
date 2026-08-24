@@ -9,6 +9,8 @@ import type { SearchAutocompleteOption } from '@components/SearchAutocomplete/Se
 import { UserInfo } from '@components/UserInfo/UserInfo.component';
 import { useDebounce } from '@hooks/useDebounce.hook';
 import {
+    useCheckFollowingUserQuery,
+    useFollowUserMutation,
     useGetUserByUsernameQuery,
     useSearchUsersQuery,
 } from '@services/github/github.service';
@@ -22,8 +24,11 @@ export const SearchContainer = () => {
     const [selectedUsername, setSelectedUsername] = useState('');
     const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false);
     const [isErrorOpen, setIsErrorOpen] = useState(false);
+    const [isFollowSuccessOpen, setIsFollowSuccessOpen] = useState(false);
+    const [isFollowErrorOpen, setIsFollowErrorOpen] = useState(false);
 
     const authUser = useAppSelector((state) => state.auth.user);
+    const token = useAppSelector((state) => state.auth.token);
 
     const userParam = searchParams.get('user')?.trim() ?? '';
 
@@ -68,7 +73,42 @@ export const SearchContainer = () => {
     const isOwnProfile =
         Boolean(authUser) && authUser?.login === userDetails?.login;
 
-    const showFollowButton = Boolean(authUser) && !isOwnProfile;
+    const showFollowButton =
+        Boolean(authUser) && !isOwnProfile && Boolean(token);
+
+    const {
+        data: isFollowing,
+        isLoading: isFollowingLoading,
+        isFetching: isFollowingFetching,
+    } = useCheckFollowingUserQuery(
+        {
+            username: selectedUsername,
+            token: token ?? '',
+        },
+        {
+            skip: !selectedUsername || !showFollowButton,
+        },
+    );
+
+    const [followUser, { isLoading: isFollowLoading }] =
+        useFollowUserMutation();
+
+    const handleFollow = async () => {
+        if (!selectedUsername || !token) {
+            return;
+        }
+
+        try {
+            await followUser({
+                username: selectedUsername,
+                token,
+            }).unwrap();
+
+            setIsFollowSuccessOpen(true);
+        } catch {
+            setIsFollowErrorOpen(true);
+        }
+    };
 
     const handleInputChange = (
         _: React.SyntheticEvent,
@@ -174,6 +214,13 @@ export const SearchContainer = () => {
                 details={userDetails}
                 loading={isUserLoading || isUserFetching}
                 showFollowButton={showFollowButton}
+                isFollowing={isFollowing}
+                isFollowLoading={
+                    isFollowLoading || isFollowingLoading || isFollowingFetching
+                }
+                onFollow={() => {
+                    void handleFollow();
+                }}
             />
 
             <Snackbar
@@ -189,6 +236,34 @@ export const SearchContainer = () => {
                     {searchError
                         ? 'Failed to search GitHub users. Please try again.'
                         : 'Failed to load user details. Please try again.'}
+                </Alert>
+            </Snackbar>
+
+            <Snackbar
+                open={isFollowErrorOpen}
+                autoHideDuration={4000}
+                onClose={() => setIsFollowErrorOpen(false)}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+            >
+                <Alert severity="error" variant="filled">
+                    Failed to follow @{selectedUsername}. Please try again.
+                </Alert>
+            </Snackbar>
+
+            <Snackbar
+                open={isFollowSuccessOpen}
+                autoHideDuration={4000}
+                onClose={() => setIsFollowSuccessOpen(false)}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+            >
+                <Alert severity="success" variant="filled">
+                    Successfully followed @{selectedUsername}.
                 </Alert>
             </Snackbar>
         </Stack>

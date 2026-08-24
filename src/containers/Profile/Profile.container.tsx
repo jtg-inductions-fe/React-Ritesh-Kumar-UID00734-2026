@@ -1,11 +1,24 @@
 import { ArrowBack } from '@mui/icons-material';
 import { Button, Stack, Typography } from '@mui/material';
 
+import { FollowersList } from '@components/FollowersList/FollowersList.component';
 import { UserInfo } from '@components/UserInfo/UserInfo.component';
+import { useGetUserFollowersQuery } from '@services/github/github.service';
 import { useAppSelector } from '@store';
 
 export const ProfileContainer = () => {
     const user = useAppSelector((state) => state.auth.user);
+
+    const username = user?.login ?? '';
+
+    const {
+        data: followers,
+        isLoading,
+        isFetching,
+        isError,
+    } = useGetUserFollowersQuery(username, {
+        skip: !username,
+    });
 
     const handleBack = () => {
         window.history.back();
@@ -36,6 +49,12 @@ export const ProfileContainer = () => {
                 details={user ?? undefined}
                 loading={false}
                 showFollowButton={false}
+            />
+
+            <FollowersList
+                followers={followers}
+                loading={isLoading || isFetching}
+                error={isError}
             />
         </Stack>
     );
