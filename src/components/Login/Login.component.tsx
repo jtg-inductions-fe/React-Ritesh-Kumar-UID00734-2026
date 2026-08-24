@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
 import {
-    Box,
     Button,
     CircularProgress,
     Stack,
@@ -79,11 +78,10 @@ export const Login = ({ loading = false, onSubmit }: LoginProps) => {
     };
 
     return (
-        <Box
+        <Stack
             component="section"
             width="100%"
             minHeight="100vh"
-            display="flex"
             alignItems="center"
             justifyContent="center"
             padding={3}
@@ -155,6 +153,6 @@ export const Login = ({ loading = false, onSubmit }: LoginProps) => {
                     </Stack>
                 </Stack>
             </Stack>
-        </Box>
+        </Stack>
     );
 };
