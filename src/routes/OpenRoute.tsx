@@ -5,7 +5,7 @@ import { LoginPage } from '@pages/Login/Login.page';
 
 import { GuestRoute } from './Guest.route';
 
-export const appRouter = createBrowserRouter([
+export const openRoutes = createBrowserRouter([
     {
         path: '/',
         element: <HomePage />,

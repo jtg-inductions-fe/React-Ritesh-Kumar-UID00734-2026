@@ -8,7 +8,7 @@ import { RouterProvider } from 'react-router-dom';
 
 import { AuthContainer } from '@containers/Auth/Auth.container';
 import { AppLayout } from '@layouts/App/App.layout';
-import { appRouter } from '@routes/App.route';
+import { openRoutes } from '@routes/OpenRoute';
 import { store } from '@store';
 import { theme } from '@theme';
 
@@ -17,15 +17,14 @@ const rootElement = document.getElementById('root') as HTMLElement;
 createRoot(rootElement).render(
     <StrictMode>
         <Provider store={store}>
-            <AuthContainer>
-                <ThemeProvider theme={theme}>
+            <ThemeProvider theme={theme}>
+                <AuthContainer>
                     <CssBaseline />
-
                     <AppLayout>
-                        <RouterProvider router={appRouter} />
+                        <RouterProvider router={openRoutes} />
                     </AppLayout>
-                </ThemeProvider>
-            </AuthContainer>
+                </AuthContainer>
+            </ThemeProvider>
         </Provider>
     </StrictMode>,
 );
