@@ -72,7 +72,6 @@ export const UserInfo = ({ details, loading }: UserInfoProps) => {
                                     width: '100%',
                                     height: 'auto',
                                     aspectRatio: '1 / 1',
-                                    borderRadius: 2,
                                 }}
                             />
                         </Box>

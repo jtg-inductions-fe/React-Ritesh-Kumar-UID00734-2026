@@ -149,6 +149,8 @@ export const SearchContainer = () => {
                         isDebouncing || isSearchLoading || isSearchFetching
                     }
                     open={isAutocompleteOpen}
+                    label="Search GitHub users"
+                    placeholder="Search users..."
                     onInputChange={handleInputChange}
                     onChange={handleOptionChange}
                     onOpen={handleAutocompleteOpen}

@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 
 import { AppLayout } from '@layouts/App/App.layout';
-import { appRouter } from '@routes/App.route';
+import { openRoutes } from '@routes/OpenRoute';
 import { store } from '@store';
 import { theme } from '@theme';
 
@@ -20,7 +20,7 @@ createRoot(rootElement).render(
                 <CssBaseline />
 
                 <AppLayout>
-                    <RouterProvider router={appRouter} />
+                    <RouterProvider router={openRoutes} />
                 </AppLayout>
             </ThemeProvider>
         </Provider>

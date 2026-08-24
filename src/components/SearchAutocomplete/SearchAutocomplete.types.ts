@@ -10,6 +10,8 @@ export interface SearchAutocompleteProps {
     options: SearchAutocompleteOption[];
     loading: boolean;
     open: boolean;
+    label: string;
+    placeholder: string;
     onInputChange: (
         event: React.SyntheticEvent,
         value: string,
