@@ -10,9 +10,7 @@ export const SearchContainer = () => {
     const [query, setQuery] = useState('');
     const [isErrorOpen, setIsErrorOpen] = useState(false);
 
-    const debouncedQuery = useDebounce(query, 500);
-
-    const isDebouncing = query.trim().length > 0 && query !== debouncedQuery;
+    const { value: debouncedQuery, isDebouncing } = useDebounce(query, 500);
 
     const { data, isLoading, isFetching, error } = useSearchUsersQuery(
         debouncedQuery,
