@@ -1,4 +1,4 @@
-import type { GitHubUserDetails } from '@services/github/github.service.types';
+import type { GitHubUserDetails } from 'types/github.service.types';
 
 export interface UserInfoProps {
     details?: Pick<

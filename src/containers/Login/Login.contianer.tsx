@@ -4,7 +4,7 @@ import { Alert, Snackbar } from '@mui/material';
 
 import { useNavigate } from 'react-router-dom';
 
-import { Login } from '@components/Login/Login';
+import { Login } from '@components/Login/Login.component';
 import type { LoginFormValues } from '@components/Login/Login.types';
 import { setCredentials } from '@features/auth/authSlice';
 import { useLazyGetAuthenticatedUserQuery } from '@services/github/github.service';
@@ -46,7 +46,7 @@ export const LoginContainer = () => {
                 }),
             );
 
-            void navigate('/search');
+            void navigate('/');
         } catch {
             setLoginError('Invalid GitHub username or personal access token.');
         }

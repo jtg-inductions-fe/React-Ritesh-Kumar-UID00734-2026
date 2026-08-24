@@ -4,24 +4,24 @@ import { AppLayout } from '@layouts/App/App.layout';
 import { HomePage } from '@pages/Home/Home.page';
 import { LoginPage } from '@pages/Login/Login.page';
 
-import { GuestRoute } from './Guest.route';
+import { PublicRoute } from './PublicRoute';
 
-export const appRouter = createBrowserRouter([
+export const openRoutes = createBrowserRouter([
     {
         element: <AppLayout />,
         children: [
             {
-                element: <GuestRoute />,
+                path: '/',
+                element: <HomePage />,
+            },
+            {
+                element: <PublicRoute />,
                 children: [
                     {
                         path: '/login',
                         element: <LoginPage />,
                     },
                 ],
-            },
-            {
-                path: '/',
-                element: <HomePage />,
             },
         ],
     },

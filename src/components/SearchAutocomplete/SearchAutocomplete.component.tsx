@@ -13,6 +13,8 @@ export const SearchAutocomplete = ({
     options,
     loading,
     open,
+    label,
+    placeholder,
     onInputChange,
     onChange,
     onOpen,
@@ -48,8 +50,8 @@ export const SearchAutocomplete = ({
         renderInput={(params) => (
             <TextField
                 {...params}
-                label="Search GitHub users"
-                placeholder="Search users..."
+                label={label}
+                placeholder={placeholder}
                 slotProps={{
                     input: {
                         ...params.InputProps,
