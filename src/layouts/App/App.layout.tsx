@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 
 import { Outlet } from 'react-router-dom';
 
-import { HeaderLayout } from '@layouts/Header/Header.layout';
+import { HeaderContainer } from '@containers/Header/Header.container';
 
 export const AppLayout = () => (
     <Box
@@ -11,7 +11,7 @@ export const AppLayout = () => (
         minHeight="100vh"
         margin="0 auto"
     >
-        <HeaderLayout />
+        <HeaderContainer />
 
         <Outlet />
     </Box>

@@ -1,20 +1,27 @@
 import { useState } from 'react';
 
-import { Avatar, Box, Button, IconButton, Typography } from '@mui/material';
+import {
+    Avatar,
+    Box,
+    Button,
+    IconButton,
+    Stack,
+    Typography,
+} from '@mui/material';
+
+import { Link } from 'react-router-dom';
 
 import logo from '@assets/images/logo.svg';
+import { UserMenu } from '@components/UserMenu/UserMenu';
+import { ROUTES } from '@constants';
 
 import { HeaderAppBar } from './Header.styles';
 import type { HeaderProps } from './Header.types';
-import { UserMenu } from './UserMenu/UserMenu';
 
 export const Header = ({
     isAuthenticated,
     isLoginPage,
     user,
-    onBrandClick,
-    onLogin,
-    onHome,
     onViewProfile,
     onLogout,
 }: HeaderProps) => {
@@ -30,33 +37,27 @@ export const Header = ({
 
     return (
         <HeaderAppBar position="static">
-            <Box
-                component="button"
-                type="button"
-                display="flex"
+            <Stack
+                component={Link}
+                to={ROUTES.HOME}
+                direction="row"
                 alignItems="center"
                 gap={2}
-                border={0}
-                bgcolor="transparent"
                 color="inherit"
-                textAlign="left"
-                onClick={onBrandClick}
+                sx={{
+                    textDecoration: 'none',
+                }}
             >
                 <Box
                     component="img"
                     src={logo}
                     alt="Sora"
-                    width={36}
-                    height={36}
+                    width={(theme) => theme.spacing(9)}
+                    height={(theme) => theme.spacing(9)}
                     display="block"
                 />
 
-                <Box
-                    display="flex"
-                    flexDirection="column"
-                    justifyContent="center"
-                    gap={1}
-                >
+                <Stack justifyContent="center" gap={1}>
                     <Typography variant="h6" component="span" fontWeight={700}>
                         Sora
                     </Typography>
@@ -68,19 +69,19 @@ export const Header = ({
                     >
                         Explore the GitHub Community
                     </Typography>
-                </Box>
-            </Box>
+                </Stack>
+            </Stack>
 
             {isAuthenticated ? (
                 <IconButton onClick={handleAvatarClick}>
                     <Avatar src={user?.avatar_url} alt={user?.login} />
                 </IconButton>
             ) : isLoginPage ? (
-                <Button variant="contained" onClick={onHome}>
+                <Button component={Link} to={ROUTES.HOME} variant="contained">
                     Home
                 </Button>
             ) : (
-                <Button variant="contained" onClick={onLogin}>
+                <Button component={Link} to={ROUTES.LOGIN} variant="contained">
                     Login
                 </Button>
             )}

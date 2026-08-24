@@ -1,5 +1,6 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
+import { ROUTES } from '@constants';
 import { useAppSelector } from '@store';
 
 export const PublicRoute = () => {
@@ -8,7 +9,7 @@ export const PublicRoute = () => {
     );
 
     if (isAuthenticated) {
-        return <Navigate to="/" replace />;
+        return <Navigate to={ROUTES.HOME} replace />;
     }
 
     return <Outlet />;

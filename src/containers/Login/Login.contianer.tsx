@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Login } from '@components/Login/Login.component';
 import type { LoginFormValues } from '@components/Login/Login.types';
+import { ROUTES } from '@constants';
 import { setCredentials } from '@features/auth/authSlice';
 import { useLazyGetAuthenticatedUserQuery } from '@services/github/github.service';
 import { useAppDispatch } from '@store';
@@ -46,10 +47,14 @@ export const LoginContainer = () => {
                 }),
             );
 
-            void navigate('/');
+            void navigate(ROUTES.HOME);
         } catch {
             setLoginError('Invalid GitHub username or personal access token.');
         }
+    };
+
+    const handleCloseError = () => {
+        setLoginError(undefined);
     };
 
     return (
@@ -59,7 +64,7 @@ export const LoginContainer = () => {
             <Snackbar
                 open={Boolean(loginError)}
                 autoHideDuration={4000}
-                onClose={() => setLoginError(undefined)}
+                onClose={handleCloseError}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
