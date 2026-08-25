@@ -8,7 +8,6 @@ import {
 import {
     Avatar,
     Box,
-    Button,
     CircularProgress,
     Divider,
     Link,
@@ -57,12 +56,7 @@ export const UserInfo = ({ details, loading }: UserInfoProps) => {
             borderRadius={3}
         >
             <Stack direction="row" gap={7} height="100%">
-                <Stack
-                    flex={1}
-                    alignItems="flex-start"
-                    justifyContent="space-between"
-                    gap={4}
-                >
+                <Stack flex={1} alignItems="flex-start" gap={4}>
                     <Stack width="100%" alignItems="flex-start" gap={3}>
                         <Box width="100%" maxWidth={280}>
                             <Avatar
@@ -105,10 +99,6 @@ export const UserInfo = ({ details, loading }: UserInfoProps) => {
                             </Stack>
                         )}
                     </Stack>
-
-                    <Button variant="contained" size="large" fullWidth>
-                        Follow
-                    </Button>
                 </Stack>
 
                 <Divider orientation="vertical" flexItem />

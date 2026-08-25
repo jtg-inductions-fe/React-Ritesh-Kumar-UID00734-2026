@@ -6,8 +6,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 
-import { AppLayout } from '@layouts/App/App.layout';
-import { openRoutes } from '@routes/OpenRoute';
+import { router } from '@routes/routes';
 import { store } from '@store';
 import { theme } from '@theme';
 
@@ -19,9 +18,7 @@ createRoot(rootElement).render(
             <ThemeProvider theme={theme}>
                 <CssBaseline />
 
-                <AppLayout>
-                    <RouterProvider router={openRoutes} />
-                </AppLayout>
+                <RouterProvider router={router} />
             </ThemeProvider>
         </Provider>
     </StrictMode>,
