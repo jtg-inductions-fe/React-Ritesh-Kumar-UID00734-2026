@@ -1,0 +1,24 @@
+import { createApi } from '@reduxjs/toolkit/query/react';
+
+import { API_ENDPOINTS } from '@constants';
+import { axiosBaseQuery } from '@services/api/axiosBaseQuery';
+
+import type { GitHubUserSearchResponse } from './github.service.types';
+
+export const githubApi = createApi({
+    reducerPath: 'githubApi',
+    baseQuery: axiosBaseQuery(),
+    endpoints: (builder) => ({
+        searchUsers: builder.query<GitHubUserSearchResponse, string>({
+            query: (query: string) => ({
+                url: API_ENDPOINTS.GITHUB.SEARCH_USERS,
+                method: 'GET',
+                params: {
+                    q: query,
+                },
+            }),
+        }),
+    }),
+});
+
+export const { useSearchUsersQuery } = githubApi;
