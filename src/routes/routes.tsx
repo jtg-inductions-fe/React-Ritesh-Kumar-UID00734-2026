@@ -1,9 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
-import { AppLayout } from '@layouts/App/App.layout';
-import { HomePage } from '@pages/Home/Home.page';
-import { LoginPage } from '@pages/Login/Login.page';
-import { ProfilePage } from '@pages/Profile/Profile.page';
+import { AppLayout } from '@layouts';
+import { HomePage, LoginPage, ProfilePage } from '@pages';
 
 import { OpenRoute } from './OpenRoute';
 import { PrivateRoute } from './PrivateRoute';

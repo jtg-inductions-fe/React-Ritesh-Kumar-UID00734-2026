@@ -1,13 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { setCredentials } from '@features/auth/authSlice';
+import { setCredentials } from '@features';
 import { useAppDispatch } from '@store';
-import { getStoredToken, getStoredUser } from '@utils/authStorage';
+import { getStoredToken, getStoredUser } from '@utils';
 
 import type { AuthContainerProps } from './Auth.types';
 
 export const AuthContainer = ({ children }: AuthContainerProps) => {
     const dispatch = useAppDispatch();
+    const [isHydrated, setIsHydrated] = useState(false);
 
     useEffect(() => {
         const user = getStoredUser();
@@ -21,7 +22,13 @@ export const AuthContainer = ({ children }: AuthContainerProps) => {
                 }),
             );
         }
+
+        setIsHydrated(true);
     }, [dispatch]);
+
+    if (!isHydrated) {
+        return null;
+    }
 
     return children;
 };

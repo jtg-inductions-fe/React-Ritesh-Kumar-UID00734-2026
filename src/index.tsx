@@ -6,8 +6,8 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 
-import { AuthContainer } from '@containers/Auth/Auth.container';
-import { router } from '@routes/routes';
+import { AuthContainer } from '@containers';
+import { router } from '@routes';
 import { store } from '@store';
 import { theme } from '@theme';
 

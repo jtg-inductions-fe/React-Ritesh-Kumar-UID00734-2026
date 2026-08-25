@@ -1,10 +1,10 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { Header } from '@components/Header/Header.component';
+import { Header } from '@components';
 import { ROUTES } from '@constants';
-import { clearCredentials } from '@features/auth/authSlice';
+import { clearCredentials } from '@features';
 import { useAppDispatch, useAppSelector } from '@store';
-import { clearAuthData } from '@utils/authStorage';
+import { clearAuthData } from '@utils';
 
 export const HeaderContainer = () => {
     const navigate = useNavigate();

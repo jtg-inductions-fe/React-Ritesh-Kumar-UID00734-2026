@@ -2,7 +2,7 @@ import { Stack } from '@mui/material';
 
 import { Outlet } from 'react-router-dom';
 
-import { HeaderContainer } from '@containers/Header/Header.container';
+import { HeaderContainer } from '@containers';
 
 export const AppLayout = () => (
     <Stack

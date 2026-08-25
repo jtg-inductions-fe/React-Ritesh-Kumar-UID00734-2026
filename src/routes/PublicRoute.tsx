@@ -7,7 +7,6 @@ export const PublicRoute = () => {
     const isAuthenticated = useAppSelector(
         (state) => state.auth.isAuthenticated,
     );
-
     if (isAuthenticated) {
         return <Navigate to={ROUTES.HOME} replace />;
     }

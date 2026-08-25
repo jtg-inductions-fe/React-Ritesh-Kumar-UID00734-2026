@@ -1,6 +1,6 @@
 import { Stack, Typography } from '@mui/material';
 
-import { UserInfo } from '@components/UserInfo/UserInfo.component';
+import { UserInfo } from '@components';
 import { useAppSelector } from '@store';
 
 export const ProfileContainer = () => {

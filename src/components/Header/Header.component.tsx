@@ -12,7 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 
 import logo from '@assets/images/logo.svg';
-import { UserMenu } from '@components/UserMenu/UserMenu';
+import { UserMenu } from '@components';
 import { ROUTES } from '@constants';
 
 import { HeaderAppBar } from './Header.styles';
