@@ -8,7 +8,6 @@ import {
 import {
     Avatar,
     Box,
-    Button,
     CircularProgress,
     Divider,
     Link,
@@ -18,11 +17,7 @@ import {
 
 import type { UserInfoProps } from './UserInfo.types';
 
-export const UserInfo = ({
-    details,
-    loading,
-    showFollowButton,
-}: UserInfoProps) => {
+export const UserInfo = ({ details, loading }: UserInfoProps) => {
     if (loading) {
         return (
             <Stack
@@ -61,12 +56,7 @@ export const UserInfo = ({
             borderRadius={3}
         >
             <Stack direction="row" gap={7} height="100%">
-                <Stack
-                    flex={1}
-                    alignItems="flex-start"
-                    justifyContent="space-between"
-                    gap={4}
-                >
+                <Stack flex={1} alignItems="flex-start" gap={4}>
                     <Stack width="100%" alignItems="flex-start" gap={3}>
                         <Box width="100%" maxWidth={280}>
                             <Avatar
@@ -109,12 +99,6 @@ export const UserInfo = ({
                             </Stack>
                         )}
                     </Stack>
-
-                    {showFollowButton && (
-                        <Button variant="contained" size="large" fullWidth>
-                            Follow
-                        </Button>
-                    )}
                 </Stack>
 
                 <Divider orientation="vertical" flexItem />

@@ -12,7 +12,6 @@ import {
     useGetUserByUsernameQuery,
     useSearchUsersQuery,
 } from '@services/github/github.service';
-import { useAppSelector } from '@store';
 
 export const SearchContainer = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -21,8 +20,6 @@ export const SearchContainer = () => {
     const [selectedUsername, setSelectedUsername] = useState('');
     const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false);
     const [isErrorOpen, setIsErrorOpen] = useState(false);
-
-    const authUser = useAppSelector((state) => state.auth.user);
 
     const userParam = searchParams.get('user')?.trim() ?? '';
 
@@ -60,11 +57,6 @@ export const SearchContainer = () => {
     const options: SearchAutocompleteOption[] = isDebouncing
         ? []
         : (searchData?.items ?? []);
-
-    const isOwnProfile =
-        Boolean(authUser) && authUser?.login === userDetails?.login;
-
-    const showFollowButton = Boolean(authUser) && !isOwnProfile;
 
     const handleInputChange = (
         _: React.SyntheticEvent,
@@ -170,7 +162,6 @@ export const SearchContainer = () => {
             <UserInfo
                 details={userDetails}
                 loading={isUserLoading || isUserFetching}
-                showFollowButton={showFollowButton}
             />
 
             <Snackbar
