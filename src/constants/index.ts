@@ -1,3 +1,3 @@
-export { COLORS, HTML_FONT_SIZE, SCALING_FACTOR } from './themeConstant';
-export { API_ENDPOINTS } from './api.ts';
-export { ROUTES } from './routeConstant.ts';
+export { COLORS, HTML_FONT_SIZE, SCALING_FACTOR } from './theme.constant.ts';
+export { API_ENDPOINTS } from './api.constant.ts';
+export { ROUTES } from './route.constant.ts';
