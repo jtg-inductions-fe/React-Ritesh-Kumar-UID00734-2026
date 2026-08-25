@@ -1,4 +1,4 @@
-import type { GitHubAuthenticatedUser } from '@_types/github.service.types';
+import type { GitHubAuthenticatedUser } from '@_types/github.types';
 
 export interface AuthState {
     user: GitHubAuthenticatedUser | null;

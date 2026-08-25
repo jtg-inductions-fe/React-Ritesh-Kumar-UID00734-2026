@@ -4,7 +4,7 @@ import type {
     GitHubAuthenticatedUser,
     GitHubUserDetails,
     GitHubUserSearchResponse,
-} from '@_types/github.service.types';
+} from '@_types/github.types';
 import { API_ENDPOINTS } from '@constants';
 import { axiosBaseQuery } from '@services/api/axiosBaseQuery';
 
