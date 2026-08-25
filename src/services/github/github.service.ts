@@ -4,6 +4,7 @@ import { API_ENDPOINTS } from '@constants';
 import { axiosBaseQuery } from '@services/api/axiosBaseQuery';
 
 import type { GitHubUserSearchResponse } from './github.service.types';
+import type { GitHubUserDetails } from './github.service.types';
 
 export const githubApi = createApi({
     reducerPath: 'githubApi',
@@ -18,7 +19,14 @@ export const githubApi = createApi({
                 },
             }),
         }),
+
+        getUserByUsername: builder.query<GitHubUserDetails, string>({
+            query: (username) => ({
+                url: API_ENDPOINTS.GITHUB.USER_DETAILS(username),
+                method: 'GET',
+            }),
+        }),
     }),
 });
 
-export const { useSearchUsersQuery } = githubApi;
+export const { useSearchUsersQuery, useGetUserByUsernameQuery } = githubApi;

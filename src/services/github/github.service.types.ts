@@ -1,4 +1,4 @@
-export interface GitHubUserSearchItem {
+export interface GitHubUser {
     login: string;
     id: number;
     node_id: string;
@@ -16,8 +16,11 @@ export interface GitHubUserSearchItem {
     events_url: string;
     received_events_url: string;
     type: string;
-    user_view_type: string;
     site_admin: boolean;
+}
+
+export interface GitHubUserSearchItem extends GitHubUser {
+    user_view_type: string;
     score: number;
 }
 
@@ -25,4 +28,21 @@ export interface GitHubUserSearchResponse {
     total_count: number;
     incomplete_results: boolean;
     items: GitHubUserSearchItem[];
+}
+
+export interface GitHubUserDetails extends GitHubUser {
+    name: string | null;
+    company: string | null;
+    blog: string | null;
+    location: string | null;
+    email: string | null;
+    hireable: boolean | null;
+    bio: string | null;
+    twitter_username: string | null;
+    public_repos: number;
+    public_gists: number;
+    followers: number;
+    following: number;
+    created_at: string;
+    updated_at: string;
 }

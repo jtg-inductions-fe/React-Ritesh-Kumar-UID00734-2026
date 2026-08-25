@@ -4,9 +4,9 @@ import { createRoot } from 'react-dom/client';
 import { CssBaseline, ThemeProvider } from '@mui/material';
 
 import { Provider } from 'react-redux';
+import { RouterProvider } from 'react-router-dom';
 
-import { SearchContainer } from '@containers/Search/Search.container';
-import { AppLayout } from '@layouts/App/App.layout';
+import { router } from '@routes/routes';
 import { store } from '@store';
 import { theme } from '@theme';
 
@@ -17,9 +17,8 @@ createRoot(rootElement).render(
         <Provider store={store}>
             <ThemeProvider theme={theme}>
                 <CssBaseline />
-                <AppLayout>
-                    <SearchContainer />
-                </AppLayout>
+
+                <RouterProvider router={router} />
             </ThemeProvider>
         </Provider>
     </StrictMode>,
