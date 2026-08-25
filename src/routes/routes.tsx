@@ -5,15 +5,25 @@ import { HomePage } from '@pages/Home/Home.page';
 import { LoginPage } from '@pages/Login/Login.page';
 import { ProfilePage } from '@pages/Profile/Profile.page';
 
-import { GuestRoute } from './Guest.route';
-import { ProtectedRoute } from './Protected.route';
+import { OpenRoute } from './OpenRoute';
+import { PrivateRoute } from './PrivateRoute';
+import { PublicRoute } from './PublicRoute';
 
-export const appRouter = createBrowserRouter([
+export const router = createBrowserRouter([
     {
         element: <AppLayout />,
         children: [
             {
-                element: <GuestRoute />,
+                element: <OpenRoute />,
+                children: [
+                    {
+                        path: '/',
+                        element: <HomePage />,
+                    },
+                ],
+            },
+            {
+                element: <PublicRoute />,
                 children: [
                     {
                         path: '/login',
@@ -22,11 +32,7 @@ export const appRouter = createBrowserRouter([
                 ],
             },
             {
-                path: '/',
-                element: <HomePage />,
-            },
-            {
-                element: <ProtectedRoute />,
+                element: <PrivateRoute />,
                 children: [
                     {
                         path: '/profile',

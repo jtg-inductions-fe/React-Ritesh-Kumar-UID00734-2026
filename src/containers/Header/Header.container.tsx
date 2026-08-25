@@ -1,11 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import { Header } from '@components/Header/Header';
+import { Header } from '@components/Header/Header.component';
+import { ROUTES } from '@constants';
 import { clearCredentials } from '@features/auth/authSlice';
 import { useAppDispatch, useAppSelector } from '@store';
 import { clearAuthData } from '@utils/authStorage';
 
-export const HeaderLayout = () => {
+export const HeaderContainer = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const dispatch = useAppDispatch();
@@ -15,29 +16,29 @@ export const HeaderLayout = () => {
         (state) => state.auth.isAuthenticated,
     );
 
-    const isLoginPage = location.pathname === '/login';
+    const isLoginPage = location.pathname === ROUTES.LOGIN;
 
     const handleBrandClick = () => {
-        void navigate('/');
+        void navigate(ROUTES.HOME);
     };
 
     const handleLogin = () => {
-        void navigate('/login');
+        void navigate(ROUTES.LOGIN);
     };
 
     const handleHome = () => {
-        void navigate('/');
+        void navigate(ROUTES.HOME);
     };
 
     const handleViewProfile = () => {
-        void navigate('/profile');
+        void navigate(ROUTES.PROFILE);
     };
 
     const handleLogout = () => {
         clearAuthData();
         dispatch(clearCredentials());
 
-        void navigate('/login');
+        void navigate(ROUTES.LOGIN);
     };
 
     return (

@@ -1,4 +1,4 @@
-import type { GitHubUserSearchItem } from '@services/github/github.service.types';
+import type { GitHubUserSearchItem } from '@_types/github.service.types';
 
 export type SearchAutocompleteOption = Pick<
     GitHubUserSearchItem,
@@ -10,6 +10,8 @@ export interface SearchAutocompleteProps {
     options: SearchAutocompleteOption[];
     loading: boolean;
     open: boolean;
+    label: string;
+    placeholder: string;
     onInputChange: (
         event: React.SyntheticEvent,
         value: string,

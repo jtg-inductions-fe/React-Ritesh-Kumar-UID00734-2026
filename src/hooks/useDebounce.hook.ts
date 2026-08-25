@@ -1,11 +1,23 @@
 import { useEffect, useState } from 'react';
 
-export const useDebounce = <T>(value: T, delay: number): T => {
+interface UseDebounceResult<T> {
+    value: T;
+    isDebouncing: boolean;
+}
+
+export const useDebounce = <T>(
+    value: T,
+    delay: number,
+): UseDebounceResult<T> => {
     const [debouncedValue, setDebouncedValue] = useState(value);
+    const [isDebouncing, setIsDebouncing] = useState(false);
 
     useEffect(() => {
+        setIsDebouncing(true);
+
         const timer = setTimeout(() => {
             setDebouncedValue(value);
+            setIsDebouncing(false);
         }, delay);
 
         return () => {
@@ -13,5 +25,8 @@ export const useDebounce = <T>(value: T, delay: number): T => {
         };
     }, [value, delay]);
 
-    return debouncedValue;
+    return {
+        value: debouncedValue,
+        isDebouncing,
+    };
 };

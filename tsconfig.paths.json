@@ -12,10 +12,11 @@
             "@pages/*": ["pages/*"],
             "@routes/*": ["routes/*"],
             "@services/*": ["services/*"],
+            "@store": ["store/index"],
             "@theme": ["theme/index"],
             "@utils/*": ["utils/*"],
-            "@tests/*": ["tests/*"],
-            "@store": ["store/index"]
+            "@_types/*": ["types/*"],
+            "@tests/*": ["tests/*"]
         }
     }
 }

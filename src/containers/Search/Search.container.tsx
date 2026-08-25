@@ -12,33 +12,26 @@ import {
     useGetUserByUsernameQuery,
     useSearchUsersQuery,
 } from '@services/github/github.service';
-import { useAppSelector } from '@store';
 
 export const SearchContainer = () => {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [query, setQuery] = useState('');
-    const [searchQuery, setSearchQuery] = useState('');
     const [selectedUsername, setSelectedUsername] = useState('');
     const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false);
     const [isErrorOpen, setIsErrorOpen] = useState(false);
 
-    const authUser = useAppSelector((state) => state.auth.user);
-
     const userParam = searchParams.get('user')?.trim() ?? '';
 
-    const debouncedSearchQuery = useDebounce(searchQuery, 500);
-
-    const isDebouncing =
-        searchQuery.trim().length > 0 && searchQuery !== debouncedSearchQuery;
+    const { value: debouncedQuery, isDebouncing } = useDebounce(query, 500);
 
     const {
         data: searchData,
         isLoading: isSearchLoading,
         isFetching: isSearchFetching,
         error: searchError,
-    } = useSearchUsersQuery(debouncedSearchQuery, {
-        skip: debouncedSearchQuery.trim().length === 0,
+    } = useSearchUsersQuery(debouncedQuery, {
+        skip: debouncedQuery.trim().length === 0,
     });
 
     const {
@@ -65,11 +58,6 @@ export const SearchContainer = () => {
         ? []
         : (searchData?.items ?? []);
 
-    const isOwnProfile =
-        Boolean(authUser) && authUser?.login === userDetails?.login;
-
-    const showFollowButton = Boolean(authUser) && !isOwnProfile;
-
     const handleInputChange = (
         _: React.SyntheticEvent,
         value: string,
@@ -84,7 +72,6 @@ export const SearchContainer = () => {
         }
 
         setQuery(value);
-        setSearchQuery(value);
 
         const hasQuery = value.trim().length > 0;
 
@@ -162,6 +149,8 @@ export const SearchContainer = () => {
                         isDebouncing || isSearchLoading || isSearchFetching
                     }
                     open={isAutocompleteOpen}
+                    label="Search GitHub users"
+                    placeholder="Search users..."
                     onInputChange={handleInputChange}
                     onChange={handleOptionChange}
                     onOpen={handleAutocompleteOpen}
@@ -173,7 +162,6 @@ export const SearchContainer = () => {
             <UserInfo
                 details={userDetails}
                 loading={isUserLoading || isUserFetching}
-                showFollowButton={showFollowButton}
             />
 
             <Snackbar
