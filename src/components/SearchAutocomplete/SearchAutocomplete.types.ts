@@ -1,6 +1,3 @@
-import type { SerializedError } from '@reduxjs/toolkit';
-
-import type { AxiosBaseQueryError } from '@services/api/axios.types';
 import type { GitHubUserSearchItem } from '@services/github/github.service.types';
 
 export type SearchAutocompleteOption = Pick<
@@ -9,9 +6,22 @@ export type SearchAutocompleteOption = Pick<
 >;
 
 export interface SearchAutocompleteProps {
-    query: string;
-    users: SearchAutocompleteOption[];
+    value: string;
+    options: SearchAutocompleteOption[];
     loading: boolean;
-    error?: AxiosBaseQueryError | SerializedError;
-    onQueryChange: (query: string) => void;
+    open: boolean;
+    label: string;
+    placeholder: string;
+    onInputChange: (
+        event: React.SyntheticEvent,
+        value: string,
+        reason: string,
+    ) => void;
+    onChange: (
+        event: React.SyntheticEvent,
+        option: SearchAutocompleteOption | null,
+    ) => void;
+    onOpen: () => void;
+    onClose: () => void;
+    onKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
 }
