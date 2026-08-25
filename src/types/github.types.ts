@@ -46,3 +46,18 @@ export interface GitHubUserDetails extends GitHubUser {
     created_at: string;
     updated_at: string;
 }
+
+export interface GitHubAuthenticatedUser extends GitHubUserDetails {
+    private_gists: number;
+    total_private_repos: number;
+    owned_private_repos: number;
+    disk_usage: number;
+    collaborators: number;
+    two_factor_authentication: boolean;
+    plan: {
+        name: string;
+        space: number;
+        private_repos: number;
+        collaborators: number;
+    };
+}

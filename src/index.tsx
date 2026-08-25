@@ -6,6 +6,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material';
 import { Provider } from 'react-redux';
 import { RouterProvider } from 'react-router-dom';
 
+import { AuthContainer } from '@containers/Auth/Auth.container';
 import { router } from '@routes/routes';
 import { store } from '@store';
 import { theme } from '@theme';
@@ -18,7 +19,9 @@ createRoot(rootElement).render(
             <ThemeProvider theme={theme}>
                 <CssBaseline />
 
-                <RouterProvider router={router} />
+                <AuthContainer>
+                    <RouterProvider router={router} />
+                </AuthContainer>
             </ThemeProvider>
         </Provider>
     </StrictMode>,

@@ -1,10 +1,12 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
+import type {
+    GitHubAuthenticatedUser,
+    GitHubUserDetails,
+    GitHubUserSearchResponse,
+} from '@_types/github.types';
 import { API_ENDPOINTS } from '@constants';
 import { axiosBaseQuery } from '@services/api/axiosBaseQuery';
-
-import type { GitHubUserSearchResponse } from './github.service.types';
-import type { GitHubUserDetails } from './github.service.types';
 
 export const githubApi = createApi({
     reducerPath: 'githubApi',
@@ -26,7 +28,22 @@ export const githubApi = createApi({
                 method: 'GET',
             }),
         }),
+
+        getAuthenticatedUser: builder.query<GitHubAuthenticatedUser, string>({
+            query: (token) => ({
+                url: API_ENDPOINTS.GITHUB.AUTHENTICATED_USER,
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }),
+        }),
     }),
 });
 
-export const { useSearchUsersQuery, useGetUserByUsernameQuery } = githubApi;
+export const {
+    useSearchUsersQuery,
+    useGetUserByUsernameQuery,
+    useGetAuthenticatedUserQuery,
+    useLazyGetAuthenticatedUserQuery,
+} = githubApi;
