@@ -1,6 +1,6 @@
 import { createTheme } from '@mui/material/styles';
 
-import { SCALING_FACTOR } from '@constant';
+import { SCALING_FACTOR } from '@constants';
 
 /* Customized MUI components themes */
 import { components } from './components';
@@ -12,9 +12,9 @@ Initialize the theme with base theme elements (excluding typography styles and s
 */
 let theme = createTheme({
     palette,
-    breakpoints,
     mixins,
     components,
+    breakpoints,
     typography: {
         fontFamily: 'Inter',
         ...typography.typographyUtil,
@@ -26,7 +26,7 @@ let theme = createTheme({
 /* Extend the base theme with additional configurations */
 theme = createTheme(theme, {
     typography: {
-        ...typography.typographyStyle(theme),
+        ...typography.typographyStyle(),
     },
 });
 
