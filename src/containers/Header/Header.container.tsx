@@ -108,10 +108,7 @@ export const HeaderContainer = () => {
                 <UserMenu
                     anchorEl={anchorEl}
                     open={Boolean(anchorEl)}
-                    username={user.login}
-                    name={user.name}
-                    email={user.email}
-                    avatarUrl={user.avatar_url}
+                    user={user}
                     onClose={handleMenuClose}
                     onViewProfile={handleViewProfile}
                     onLogout={handleLogout}
