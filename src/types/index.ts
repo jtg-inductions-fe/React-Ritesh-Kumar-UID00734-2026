@@ -1,1 +1,7 @@
-export type * from './github.types';
+export type {
+    GitHubUser,
+    GitHubUserSearchItem,
+    GitHubUserSearchResponse,
+    GitHubUserDetails,
+    GitHubAuthenticatedUser,
+} from './github.types';

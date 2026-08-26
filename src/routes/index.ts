@@ -1,4 +1,4 @@
-export * from './OpenRoute';
-export * from './PrivateRoute';
-export * from './PublicRoute';
-export * from './routes';
+export { OpenRoute } from './OpenRoute';
+export { PrivateRoute } from './PrivateRoute';
+export { PublicRoute } from './PublicRoute';
+export { router } from './routes';

@@ -1,8 +1,8 @@
-export * from './SearchAutocomplete/SearchAutocomplete.component';
-export * from './SearchAutocomplete/SearchAutocomplete.types';
+export { SearchAutocomplete } from './SearchAutocomplete/SearchAutocomplete.component';
+export type { SearchAutocompleteOption } from './SearchAutocomplete/SearchAutocomplete.types';
 
-export * from './UserInfo/UserInfo.component';
-export * from './UserInfo/UserInfo.types';
+export { UserInfo } from './UserInfo/UserInfo.component';
+export type { UserInfoProps } from './UserInfo/UserInfo.types';
 
-export * from './UserMenu/UserMenu.component';
-export * from './UserMenu/UserMenu.types';
+export { UserMenu } from './UserMenu/UserMenu.component';
+export type { UserMenuProps } from './UserMenu/UserMenu.types';

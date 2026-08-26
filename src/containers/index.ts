@@ -1,11 +1,11 @@
-export * from './Auth/Auth.container';
-export * from './Auth/Auth.types';
+export { AuthContainer } from './Auth/Auth.container';
+export type { AuthContainerProps } from './Auth/Auth.types';
 
-export * from './Header/Header.container';
+export { HeaderContainer } from './Header/Header.container';
 
-export * from './Login/Login.contianer';
-export * from './Login/Login.types';
+export { LoginContainer } from './Login/Login.contianer';
+export type { LoginErrors, LoginFormValues } from './Login/Login.types';
 
-export * from './Profile/Profile.container';
+export { ProfileContainer } from './Profile/Profile.container';
 
-export * from './Search/Search.container';
+export { SearchContainer } from './Search/Search.container';

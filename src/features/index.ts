@@ -1,2 +1,6 @@
-export * from './auth/authSlice';
-export * from './auth/auth.types';
+export {
+    clearCredentials,
+    setCredentials,
+    authReducer,
+} from './auth/authSlice';
+export type { AuthState, SetCredentialsPayload } from './auth/auth.types';

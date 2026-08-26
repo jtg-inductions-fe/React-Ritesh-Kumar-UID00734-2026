@@ -100,7 +100,7 @@ export const LoginContainer = () => {
                 }),
             );
 
-            void navigate(ROUTES.HOME);
+            void navigate(ROUTES.PROFILE);
         } catch {
             setLoginError('Invalid GitHub username or personal access token.');
         }

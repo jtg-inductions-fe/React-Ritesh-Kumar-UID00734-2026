@@ -1,5 +1,16 @@
-export * from './api/axios';
-export * from './api/axiosBaseQuery';
-export * from './github/github.service';
+export { githubClient } from './api/axios';
 
-export type * from './api/axios.types';
+export { axiosBaseQuery } from './api/axiosBaseQuery';
+
+export {
+    githubApi,
+    useGetAuthenticatedUserQuery,
+    useLazyGetAuthenticatedUserQuery,
+    useGetUserByUsernameQuery,
+    useSearchUsersQuery,
+} from './github/github.service';
+
+export type {
+    AxiosBaseQueryError,
+    AxiosBaseQueryArgs,
+} from './api/axios.types';

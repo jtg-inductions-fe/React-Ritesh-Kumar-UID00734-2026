@@ -1,1 +1,6 @@
-export * from './authStorage';
+export {
+    clearAuthData,
+    getStoredToken,
+    getStoredUser,
+    saveAuthData,
+} from './authStorage';
