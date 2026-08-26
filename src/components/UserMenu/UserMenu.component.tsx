@@ -13,10 +13,7 @@ import type { UserMenuProps } from './UserMenu.types';
 export const UserMenu = ({
     anchorEl,
     open,
-    username,
-    name,
-    email,
-    avatarUrl,
+    user,
     onClose,
     onViewProfile,
     onLogout,
@@ -66,8 +63,8 @@ export const UserMenu = ({
             >
                 <Stack direction="row" alignItems="center" gap={2}>
                     <Avatar
-                        src={avatarUrl}
-                        alt={`${username}'s profile`}
+                        src={user.avatar_url}
+                        alt={`${user.login}'s profile`}
                         sx={{
                             width: (theme) => theme.spacing(16),
                             height: (theme) => theme.spacing(16),
@@ -76,7 +73,7 @@ export const UserMenu = ({
 
                     <Stack minWidth={0} gap={0.5}>
                         <Typography variant="subtitle1" fontWeight={700} noWrap>
-                            {name || username}
+                            {user.name}
                         </Typography>
 
                         <Typography
@@ -84,16 +81,16 @@ export const UserMenu = ({
                             color="text.secondary"
                             noWrap
                         >
-                            @{username}
+                            @{user.login}
                         </Typography>
 
-                        {email && (
+                        {user.email && (
                             <Typography
                                 variant="caption"
                                 color="text.secondary"
                                 noWrap
                             >
-                                {email}
+                                {user.email}
                             </Typography>
                         )}
                     </Stack>
@@ -103,7 +100,6 @@ export const UserMenu = ({
 
                 <Stack gap={1.5}>
                     <Button
-                        fullWidth
                         variant="outlined"
                         startIcon={<Person />}
                         onClick={handleViewProfile}
@@ -112,7 +108,6 @@ export const UserMenu = ({
                     </Button>
 
                     <Button
-                        fullWidth
                         variant="contained"
                         startIcon={<Logout />}
                         onClick={handleLogout}
