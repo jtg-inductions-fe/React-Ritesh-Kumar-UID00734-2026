@@ -21,6 +21,7 @@ import type { LoginErrors, LoginFormValues } from './Login.types';
 
 const GITHUB_CLASSIC_PAT_PATTERN = /^ghp_[A-Za-z0-9_]+$/;
 const GITHUB_FINE_GRAINED_PAT_PATTERN = /^github_pat_[A-Za-z0-9_]+$/;
+const GITHUB_USERNAME_PATTERN = /^[A-Za-z0-9]+(?:-[A-Za-z0-9]+)*$/;
 
 const isValidGitHubTokenFormat = (token: string): boolean => {
     const isValidLength = token.length === 40 || token.length === 93;
@@ -30,6 +31,38 @@ const isValidGitHubTokenFormat = (token: string): boolean => {
         GITHUB_FINE_GRAINED_PAT_PATTERN.test(token);
 
     return isValidLength && hasValidPrefix;
+};
+
+const validateToken = (token: string): string | undefined => {
+    const trimmedToken = token.trim();
+
+    if (!trimmedToken) {
+        return 'Personal access token is required.';
+    }
+
+    if (!isValidGitHubTokenFormat(trimmedToken)) {
+        return 'Please enter a valid GitHub personal access token.';
+    }
+
+    return undefined;
+};
+
+const validateUsername = (username: string): string | undefined => {
+    const trimmedUsername = username.trim();
+
+    if (!trimmedUsername) {
+        return 'Username is required.';
+    }
+
+    if (trimmedUsername.length > 39) {
+        return 'GitHub username cannot exceed 39 characters.';
+    }
+
+    if (!GITHUB_USERNAME_PATTERN.test(trimmedUsername)) {
+        return 'GitHub username can only contain letters, numbers, and hyphens.';
+    }
+
+    return undefined;
 };
 
 export const LoginContainer = () => {
@@ -47,17 +80,16 @@ export const LoginContainer = () => {
     const validate = (): LoginErrors => {
         const validationErrors: LoginErrors = {};
 
-        if (!username.trim()) {
-            validationErrors.username = 'Username is required.';
+        const usernameError = validateUsername(username);
+
+        if (usernameError) {
+            validationErrors.username = usernameError;
         }
 
-        const trimmedToken = token.trim();
+        const tokenError = validateToken(token);
 
-        if (!trimmedToken) {
-            validationErrors.token = 'Personal access token is required.';
-        } else if (!isValidGitHubTokenFormat(trimmedToken)) {
-            validationErrors.token =
-                'Please enter a valid GitHub personal access token.';
+        if (tokenError) {
+            validationErrors.token = tokenError;
         }
 
         return validationErrors;
@@ -78,6 +110,15 @@ export const LoginContainer = () => {
         }
     };
 
+    const handleUsernameBlur = () => {
+        const usernameError = validateUsername(username);
+
+        setErrors((currentErrors) => ({
+            ...currentErrors,
+            username: usernameError,
+        }));
+    };
+
     const handleTokenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
 
@@ -89,6 +130,15 @@ export const LoginContainer = () => {
                 token: undefined,
             }));
         }
+    };
+
+    const handleTokenBlur = () => {
+        const tokenError = validateToken(token);
+
+        setErrors((currentErrors) => ({
+            ...currentErrors,
+            token: tokenError,
+        }));
     };
 
     const handleLogin = async ({
@@ -180,6 +230,7 @@ export const LoginContainer = () => {
                             placeholder="Enter your GitHub username"
                             value={username}
                             onChange={handleUsernameChange}
+                            onBlur={handleUsernameBlur}
                             error={Boolean(errors.username)}
                             helperText={errors.username}
                             fullWidth
@@ -192,6 +243,7 @@ export const LoginContainer = () => {
                             type="password"
                             value={token}
                             onChange={handleTokenChange}
+                            onBlur={handleTokenBlur}
                             error={Boolean(errors.token)}
                             helperText={errors.token}
                             fullWidth
