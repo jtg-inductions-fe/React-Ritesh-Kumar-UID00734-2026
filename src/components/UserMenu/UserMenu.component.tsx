@@ -1,10 +1,10 @@
-import { Close, Logout, Person } from '@mui/icons-material';
+import { Logout, Person } from '@mui/icons-material';
 import {
     Avatar,
-    Box,
     Button,
-    IconButton,
+    Divider,
     Popover,
+    Stack,
     Typography,
 } from '@mui/material';
 
@@ -13,10 +13,7 @@ import type { UserMenuProps } from './UserMenu.types';
 export const UserMenu = ({
     anchorEl,
     open,
-    username,
-    name,
-    email,
-    avatarUrl,
+    user,
     onClose,
     onViewProfile,
     onLogout,
@@ -47,71 +44,62 @@ export const UserMenu = ({
             }}
             slotProps={{
                 paper: {
-                    style: {
+                    sx: {
                         backgroundColor: 'transparent',
                         boxShadow: 'none',
                     },
                 },
             }}
         >
-            <Box
-                width={320}
+            <Stack
+                width={(theme) => theme.spacing(80)}
                 marginTop={4}
-                bgcolor="background.default"
+                padding={4}
+                gap={3}
+                bgcolor="background.paper"
                 border={1}
                 borderColor="divider"
-                borderRadius={2}
-                overflow="hidden"
-                padding={3}
+                borderRadius={3}
             >
-                <Box display="flex" justifyContent="flex-end">
-                    <IconButton size="small" onClick={onClose}>
-                        <Close fontSize="small" />
-                    </IconButton>
-                </Box>
-
-                <Box
-                    display="flex"
-                    flexDirection="column"
-                    alignItems="center"
-                    gap={1}
-                    textAlign="center"
-                    overflow="hidden"
-                >
+                <Stack direction="row" alignItems="center" gap={2}>
                     <Avatar
-                        src={avatarUrl}
-                        alt={`${username}'s profile`}
+                        src={user.avatar_url}
+                        alt={`${user.login}'s profile`}
                         sx={{
-                            width: 64,
-                            height: 64,
+                            width: (theme) => theme.spacing(16),
+                            height: (theme) => theme.spacing(16),
                         }}
                     />
 
-                    <Typography variant="subtitle1" fontWeight={600}>
-                        {username}
-                    </Typography>
-
-                    {name && (
-                        <Typography variant="body2" color="text.secondary">
-                            {name}
+                    <Stack minWidth={0} gap={0.5}>
+                        <Typography variant="subtitle1" fontWeight={700} noWrap>
+                            {user.name}
                         </Typography>
-                    )}
 
-                    {email && (
-                        <Typography variant="body2" color="text.secondary">
-                            {email}
+                        <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            noWrap
+                        >
+                            @{user.login}
                         </Typography>
-                    )}
-                </Box>
 
-                <Box
-                    display="flex"
-                    flexDirection="column"
-                    gap={1}
-                    marginTop={2}
-                >
+                        {user.email && (
+                            <Typography
+                                variant="caption"
+                                color="text.secondary"
+                                noWrap
+                            >
+                                {user.email}
+                            </Typography>
+                        )}
+                    </Stack>
+                </Stack>
+
+                <Divider />
+
+                <Stack gap={1.5}>
                     <Button
-                        fullWidth
                         variant="outlined"
                         startIcon={<Person />}
                         onClick={handleViewProfile}
@@ -120,15 +108,14 @@ export const UserMenu = ({
                     </Button>
 
                     <Button
-                        fullWidth
                         variant="contained"
                         startIcon={<Logout />}
                         onClick={handleLogout}
                     >
                         Logout
                     </Button>
-                </Box>
-            </Box>
+                </Stack>
+            </Stack>
         </Popover>
     );
 };

@@ -64,12 +64,7 @@ export const UserInfo = ({
             borderRadius={3}
         >
             <Stack direction="row" gap={7} height="100%">
-                <Stack
-                    flex={1}
-                    alignItems="flex-start"
-                    justifyContent="space-between"
-                    gap={4}
-                >
+                <Stack flex={1} alignItems="flex-start" gap={4}>
                     <Stack width="100%" alignItems="flex-start" gap={3}>
                         <Box width="100%" maxWidth={280}>
                             <Avatar
@@ -79,7 +74,6 @@ export const UserInfo = ({
                                     width: '100%',
                                     height: 'auto',
                                     aspectRatio: '1 / 1',
-                                    borderRadius: 2,
                                 }}
                             />
                         </Box>

@@ -1,14 +1,13 @@
+import type {
+    GitHubAuthenticatedUser,
+    GitHubUser,
+    GitHubUserDetails,
+    GitHubUserSearchResponse,
+} from '@_types';
 import { createApi } from '@reduxjs/toolkit/query/react';
 
 import { API_ENDPOINTS } from '@constants';
-import { axiosBaseQuery } from '@services/api/axiosBaseQuery';
-
-import type {
-    GitHubAuthenticatedUser,
-    GitHubFollower,
-    GitHubUserDetails,
-    GitHubUserSearchResponse,
-} from './github.service.types';
+import { axiosBaseQuery } from '@services';
 
 interface AuthenticatedRequest {
     username: string;
@@ -104,7 +103,7 @@ export const githubApi = createApi({
             ],
         }),
 
-        getUserFollowers: builder.query<GitHubFollower[], string>({
+        getUserFollowers: builder.query<GitHubUser[], string>({
             query: (username) => ({
                 url: API_ENDPOINTS.GITHUB.USER_FOLLOWERS(username),
                 method: 'GET',

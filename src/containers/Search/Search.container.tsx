@@ -2,25 +2,22 @@ import { useEffect, useState } from 'react';
 
 import { Alert, Box, Snackbar, Stack, Typography } from '@mui/material';
 
+import type { SearchAutocompleteOption } from '@components';
 import { useSearchParams } from 'react-router-dom';
 
-import { SearchAutocomplete } from '@components/SearchAutocomplete/SearchAutocomplete.component';
-import type { SearchAutocompleteOption } from '@components/SearchAutocomplete/SearchAutocomplete.types';
-import { UserInfo } from '@components/UserInfo/UserInfo.component';
-import { useDebounce } from '@hooks/useDebounce.hook';
+import { SearchAutocomplete, UserInfo } from '@components';
+import { useDebounce } from '@hooks';
 import {
     useCheckFollowingUserQuery,
     useFollowUserMutation,
     useGetUserByUsernameQuery,
     useSearchUsersQuery,
-} from '@services/github/github.service';
+} from '@services';
 import { useAppSelector } from '@store';
 
 export const SearchContainer = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-
     const [query, setQuery] = useState('');
-    const [searchQuery, setSearchQuery] = useState('');
     const [selectedUsername, setSelectedUsername] = useState('');
     const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false);
     const [isErrorOpen, setIsErrorOpen] = useState(false);
@@ -32,18 +29,15 @@ export const SearchContainer = () => {
 
     const userParam = searchParams.get('user')?.trim() ?? '';
 
-    const debouncedSearchQuery = useDebounce(searchQuery, 500);
-
-    const isDebouncing =
-        searchQuery.trim().length > 0 && searchQuery !== debouncedSearchQuery;
+    const { value: debouncedQuery, isDebouncing } = useDebounce(query, 500);
 
     const {
         data: searchData,
         isLoading: isSearchLoading,
         isFetching: isSearchFetching,
         error: searchError,
-    } = useSearchUsersQuery(debouncedSearchQuery, {
-        skip: debouncedSearchQuery.trim().length === 0,
+    } = useSearchUsersQuery(debouncedQuery, {
+        skip: debouncedQuery.trim().length === 0,
     });
 
     const {
@@ -124,7 +118,6 @@ export const SearchContainer = () => {
         }
 
         setQuery(value);
-        setSearchQuery(value);
 
         const hasQuery = value.trim().length > 0;
 
@@ -202,6 +195,8 @@ export const SearchContainer = () => {
                         isDebouncing || isSearchLoading || isSearchFetching
                     }
                     open={isAutocompleteOpen}
+                    label="Search GitHub users"
+                    placeholder="Search users..."
                     onInputChange={handleInputChange}
                     onChange={handleOptionChange}
                     onOpen={handleAutocompleteOpen}

@@ -1,7 +1,7 @@
-import type { GitHubFollower } from '@services/github/github.service.types';
+import type { GitHubUser } from '@_types';
 
 export interface FollowersListProps {
-    followers?: GitHubFollower[];
+    followers?: GitHubUser[];
     loading: boolean;
     error: boolean;
 }
