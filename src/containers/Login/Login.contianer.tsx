@@ -19,6 +19,19 @@ import { saveAuthData } from '@utils/authStorage';
 
 import type { LoginErrors, LoginFormValues } from './Login.types';
 
+const GITHUB_CLASSIC_PAT_PATTERN = /^ghp_[A-Za-z0-9_]+$/;
+const GITHUB_FINE_GRAINED_PAT_PATTERN = /^github_pat_[A-Za-z0-9_]+$/;
+
+const isValidGitHubTokenFormat = (token: string): boolean => {
+    const isValidLength = token.length === 40 || token.length === 93;
+
+    const hasValidPrefix =
+        GITHUB_CLASSIC_PAT_PATTERN.test(token) ||
+        GITHUB_FINE_GRAINED_PAT_PATTERN.test(token);
+
+    return isValidLength && hasValidPrefix;
+};
+
 export const LoginContainer = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
@@ -38,8 +51,13 @@ export const LoginContainer = () => {
             validationErrors.username = 'Username is required.';
         }
 
-        if (!token.trim()) {
+        const trimmedToken = token.trim();
+
+        if (!trimmedToken) {
             validationErrors.token = 'Personal access token is required.';
+        } else if (!isValidGitHubTokenFormat(trimmedToken)) {
+            validationErrors.token =
+                'Please enter a valid GitHub personal access token.';
         }
 
         return validationErrors;
