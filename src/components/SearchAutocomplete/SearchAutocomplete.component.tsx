@@ -1,5 +1,12 @@
+import ClearIcon from '@mui/icons-material/Clear';
 import SearchIcon from '@mui/icons-material/Search';
-import { Avatar, CircularProgress, TextField, Typography } from '@mui/material';
+import {
+    Avatar,
+    CircularProgress,
+    IconButton,
+    TextField,
+    Typography,
+} from '@mui/material';
 
 import {
     StyledAutocomplete,
@@ -20,6 +27,7 @@ export const SearchAutocomplete = ({
     onOpen,
     onClose,
     onKeyDown,
+    onClear,
 }: SearchAutocompleteProps) => (
     <StyledAutocomplete
         options={options}
@@ -55,14 +63,19 @@ export const SearchAutocomplete = ({
                 slotProps={{
                     input: {
                         ...params.InputProps,
-                        endAdornment: (
-                            <>
-                                {loading && <CircularProgress size={20} />}
-
-                                {!loading && <SearchIcon />}
-
-                                {params.InputProps.endAdornment}
-                            </>
+                        endAdornment: loading ? (
+                            <CircularProgress size={20} />
+                        ) : value ? (
+                            <IconButton
+                                size="small"
+                                aria-label="Clear search"
+                                onMouseDown={(event) => event.preventDefault()}
+                                onClick={onClear}
+                            >
+                                <ClearIcon />
+                            </IconButton>
+                        ) : (
+                            <SearchIcon />
                         ),
                     },
                 }}

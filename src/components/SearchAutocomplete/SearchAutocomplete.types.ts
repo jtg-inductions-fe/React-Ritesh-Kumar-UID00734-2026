@@ -24,4 +24,5 @@ export interface SearchAutocompleteProps {
     onOpen: () => void;
     onClose: () => void;
     onKeyDown: (event: React.KeyboardEvent<HTMLDivElement>) => void;
+    onClear: () => void;
 }
