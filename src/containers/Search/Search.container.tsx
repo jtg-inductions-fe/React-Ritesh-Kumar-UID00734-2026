@@ -130,6 +130,12 @@ export const SearchContainer = () => {
             user: normalizedUsername,
         });
     };
+    const handleClear = () => {
+        setQuery('');
+        setSelectedUsername('');
+        setIsAutocompleteOpen(false);
+        setSearchParams({});
+    };
 
     return (
         <Stack width="100%" alignItems="center" padding={12}>
@@ -152,6 +158,7 @@ export const SearchContainer = () => {
                     onOpen={handleAutocompleteOpen}
                     onClose={handleAutocompleteClose}
                     onKeyDown={handleKeyDown}
+                    onClear={handleClear}
                 />
             </Box>
 

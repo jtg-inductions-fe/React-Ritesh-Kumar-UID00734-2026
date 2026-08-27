@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import { ROUTES } from '@constants';
 import { AppLayout } from '@layouts';
-import { HomePage, LoginPage, ProfilePage } from '@pages';
+import { HomePage, LoginPage, NotFoundPage, ProfilePage } from '@pages';
 
 import { OpenRoute } from './OpenRoute';
 import { PrivateRoute } from './PrivateRoute';
@@ -38,6 +38,10 @@ export const router = createBrowserRouter([
                         element: <ProfilePage />,
                     },
                 ],
+            },
+            {
+                path: '*',
+                element: <NotFoundPage />,
             },
         ],
     },
