@@ -15,5 +15,10 @@ export interface UserInfoProps {
         | 'followers'
         | 'following'
     >;
+
     loading: boolean;
+    showFollowButton: boolean;
+    isFollowing?: boolean;
+    isFollowLoading?: boolean;
+    onFollow?: () => void;
 }

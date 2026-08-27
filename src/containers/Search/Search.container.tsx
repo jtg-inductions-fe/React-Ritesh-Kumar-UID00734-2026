@@ -7,15 +7,25 @@ import { useSearchParams } from 'react-router-dom';
 
 import { SearchAutocomplete, UserInfo } from '@components';
 import { useDebounce } from '@hooks';
-import { useGetUserByUsernameQuery, useSearchUsersQuery } from '@services';
+import {
+    useCheckFollowingUserQuery,
+    useFollowUserMutation,
+    useGetUserByUsernameQuery,
+    useSearchUsersQuery,
+} from '@services';
+import { useAppSelector } from '@store';
 
 export const SearchContainer = () => {
     const [searchParams, setSearchParams] = useSearchParams();
-
     const [query, setQuery] = useState('');
     const [selectedUsername, setSelectedUsername] = useState('');
     const [isAutocompleteOpen, setIsAutocompleteOpen] = useState(false);
     const [isErrorOpen, setIsErrorOpen] = useState(false);
+    const [isFollowSuccessOpen, setIsFollowSuccessOpen] = useState(false);
+    const [isFollowErrorOpen, setIsFollowErrorOpen] = useState(false);
+
+    const authUser = useAppSelector((state) => state.auth.user);
+    const token = useAppSelector((state) => state.auth.token);
 
     const userParam = searchParams.get('user')?.trim() ?? '';
 
@@ -53,6 +63,46 @@ export const SearchContainer = () => {
     const options: SearchAutocompleteOption[] = isDebouncing
         ? []
         : (searchData?.items ?? []);
+
+    const isOwnProfile =
+        Boolean(authUser) && authUser?.login === userDetails?.login;
+
+    const showFollowButton =
+        Boolean(authUser) && !isOwnProfile && Boolean(token);
+
+    const {
+        data: isFollowing,
+        isLoading: isFollowingLoading,
+        isFetching: isFollowingFetching,
+    } = useCheckFollowingUserQuery(
+        {
+            username: selectedUsername,
+            token: token ?? '',
+        },
+        {
+            skip: !selectedUsername || !showFollowButton,
+        },
+    );
+
+    const [followUser, { isLoading: isFollowLoading }] =
+        useFollowUserMutation();
+
+    const handleFollow = async () => {
+        if (!selectedUsername || !token) {
+            return;
+        }
+
+        try {
+            await followUser({
+                username: selectedUsername,
+                token,
+            }).unwrap();
+
+            setIsFollowSuccessOpen(true);
+        } catch {
+            setIsFollowErrorOpen(true);
+        }
+    };
 
     const handleInputChange = (
         _: React.SyntheticEvent,
@@ -158,6 +208,14 @@ export const SearchContainer = () => {
             <UserInfo
                 details={userDetails}
                 loading={isUserLoading || isUserFetching}
+                showFollowButton={showFollowButton}
+                isFollowing={isFollowing}
+                isFollowLoading={
+                    isFollowLoading || isFollowingLoading || isFollowingFetching
+                }
+                onFollow={() => {
+                    void handleFollow();
+                }}
             />
 
             <Snackbar
@@ -173,6 +231,34 @@ export const SearchContainer = () => {
                     {searchError
                         ? 'Failed to search GitHub users. Please try again.'
                         : 'Failed to load user details. Please try again.'}
+                </Alert>
+            </Snackbar>
+
+            <Snackbar
+                open={isFollowErrorOpen}
+                autoHideDuration={4000}
+                onClose={() => setIsFollowErrorOpen(false)}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+            >
+                <Alert severity="error" variant="filled">
+                    Failed to follow @{selectedUsername}. Please try again.
+                </Alert>
+            </Snackbar>
+
+            <Snackbar
+                open={isFollowSuccessOpen}
+                autoHideDuration={4000}
+                onClose={() => setIsFollowSuccessOpen(false)}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+            >
+                <Alert severity="success" variant="filled">
+                    Successfully followed @{selectedUsername}.
                 </Alert>
             </Snackbar>
         </Stack>

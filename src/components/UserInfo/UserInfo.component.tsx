@@ -8,6 +8,7 @@ import {
 import {
     Avatar,
     Box,
+    Button,
     CircularProgress,
     Divider,
     Link,
@@ -17,7 +18,14 @@ import {
 
 import type { UserInfoProps } from './UserInfo.types';
 
-export const UserInfo = ({ details, loading }: UserInfoProps) => {
+export const UserInfo = ({
+    details,
+    loading,
+    showFollowButton,
+    isFollowing,
+    isFollowLoading,
+    onFollow,
+}: UserInfoProps) => {
     if (loading) {
         return (
             <Stack
@@ -99,6 +107,24 @@ export const UserInfo = ({ details, loading }: UserInfoProps) => {
                             </Stack>
                         )}
                     </Stack>
+
+                    {showFollowButton && (
+                        <Button
+                            variant="contained"
+                            size="large"
+                            fullWidth
+                            disabled={isFollowing || isFollowLoading}
+                            onClick={onFollow}
+                        >
+                            {isFollowLoading ? (
+                                <CircularProgress size={24} color="inherit" />
+                            ) : isFollowing ? (
+                                'Following'
+                            ) : (
+                                'Follow'
+                            )}
+                        </Button>
+                    )}
                 </Stack>
 
                 <Divider orientation="vertical" flexItem />
