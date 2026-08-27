@@ -1,4 +1,4 @@
-import type { GitHubUserSearchItem } from '@_types/github.types';
+import type { GitHubUserSearchItem } from '@_types';
 
 export type SearchAutocompleteOption = Pick<
     GitHubUserSearchItem,

@@ -12,10 +12,10 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
-import { setCredentials } from '@features/auth/authSlice';
-import { useLazyGetAuthenticatedUserQuery } from '@services/github/github.service';
+import { setCredentials } from '@features';
+import { useLazyGetAuthenticatedUserQuery } from '@services';
 import { useAppDispatch } from '@store';
-import { saveAuthData } from '@utils/authStorage';
+import { saveAuthData } from '@utils';
 
 import type { LoginErrors, LoginFormValues } from './Login.types';
 import { validateToken, validateUsername } from './Login.utils';

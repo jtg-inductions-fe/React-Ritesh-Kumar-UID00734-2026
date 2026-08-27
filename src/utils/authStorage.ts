@@ -1,4 +1,4 @@
-import type { GitHubAuthenticatedUser } from '@_types/github.types';
+import type { GitHubAuthenticatedUser } from '@_types';
 
 const AUTH_USER_KEY = 'github_user';
 const AUTH_TOKEN_KEY = 'github_token';
@@ -27,3 +27,8 @@ export const getStoredUser = (): GitHubAuthenticatedUser | null => {
 
 export const getStoredToken = (): string | null =>
     localStorage.getItem(AUTH_TOKEN_KEY);
+
+export const clearAuthData = (): void => {
+    localStorage.removeItem(AUTH_USER_KEY);
+    localStorage.removeItem(AUTH_TOKEN_KEY);
+};
