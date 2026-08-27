@@ -12,6 +12,7 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
+import { ROUTES } from '@constants';
 import { setCredentials } from '@features';
 import { useLazyGetAuthenticatedUserQuery } from '@services';
 import { useAppDispatch } from '@store';
@@ -122,7 +123,7 @@ export const LoginContainer = () => {
                 }),
             );
 
-            void navigate('/');
+            void navigate(ROUTES.HOME);
         } catch {
             setLoginError('Invalid GitHub username or personal access token.');
         }
