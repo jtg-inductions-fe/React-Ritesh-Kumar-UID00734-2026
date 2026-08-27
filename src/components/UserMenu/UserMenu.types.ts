@@ -5,6 +5,5 @@ export interface UserMenuProps {
     open: boolean;
     user: GitHubAuthenticatedUser;
     onClose: () => void;
-    onViewProfile: () => void;
     onLogout: () => void;
 }

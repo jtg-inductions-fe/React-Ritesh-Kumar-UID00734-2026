@@ -42,10 +42,6 @@ export const HeaderContainer = () => {
         setAnchorEl(null);
     };
 
-    const handleViewProfile = () => {
-        void navigate(ROUTES.PROFILE);
-    };
-
     const handleLogout = () => {
         clearAuthData();
         dispatch(clearCredentials());
@@ -110,7 +106,6 @@ export const HeaderContainer = () => {
                     open={Boolean(anchorEl)}
                     user={user}
                     onClose={handleMenuClose}
-                    onViewProfile={handleViewProfile}
                     onLogout={handleLogout}
                 />
             )}

@@ -8,6 +8,10 @@ import {
     Typography,
 } from '@mui/material';
 
+import { Link } from 'react-router-dom';
+
+import { ROUTES } from '@constants';
+
 import type { UserMenuProps } from './UserMenu.types';
 
 export const UserMenu = ({
@@ -15,14 +19,8 @@ export const UserMenu = ({
     open,
     user,
     onClose,
-    onViewProfile,
     onLogout,
 }: UserMenuProps) => {
-    const handleViewProfile = () => {
-        onClose();
-        onViewProfile();
-    };
-
     const handleLogout = () => {
         onClose();
         onLogout();
@@ -100,9 +98,11 @@ export const UserMenu = ({
 
                 <Stack gap={1.5}>
                     <Button
+                        component={Link}
+                        to={ROUTES.PROFILE}
                         variant="outlined"
                         startIcon={<Person />}
-                        onClick={handleViewProfile}
+                        onClick={onClose}
                     >
                         View Profile
                     </Button>
