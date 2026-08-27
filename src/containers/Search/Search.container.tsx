@@ -2,16 +2,12 @@ import { useEffect, useState } from 'react';
 
 import { Alert, Box, Snackbar, Stack, Typography } from '@mui/material';
 
+import type { SearchAutocompleteOption } from '@components';
 import { useSearchParams } from 'react-router-dom';
 
-import { SearchAutocomplete } from '@components/SearchAutocomplete/SearchAutocomplete.component';
-import type { SearchAutocompleteOption } from '@components/SearchAutocomplete/SearchAutocomplete.types';
-import { UserInfo } from '@components/UserInfo/UserInfo.component';
-import { useDebounce } from '@hooks/useDebounce.hook';
-import {
-    useGetUserByUsernameQuery,
-    useSearchUsersQuery,
-} from '@services/github/github.service';
+import { SearchAutocomplete, UserInfo } from '@components';
+import { useDebounce } from '@hooks';
+import { useGetUserByUsernameQuery, useSearchUsersQuery } from '@services';
 
 export const SearchContainer = () => {
     const [searchParams, setSearchParams] = useSearchParams();

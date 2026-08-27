@@ -1,4 +1,4 @@
-import type { GitHubAuthenticatedUser } from '@_types/github.types';
+import type { GitHubAuthenticatedUser } from '@_types';
 
 export interface UserMenuProps {
     anchorEl: HTMLElement | null;

@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import { ROUTES } from '@constants';
-import { AppLayout } from '@layouts/App/App.layout';
-import { HomePage } from '@pages/Home/Home.page';
-import { LoginPage } from '@pages/Login/Login.page';
+import { AppLayout } from '@layouts';
+import { HomePage, LoginPage, ProfilePage } from '@pages';
 
 import { OpenRoute } from './OpenRoute';
+import { PrivateRoute } from './PrivateRoute';
 import { PublicRoute } from './PublicRoute';
 
 export const router = createBrowserRouter([
@@ -27,6 +27,15 @@ export const router = createBrowserRouter([
                     {
                         path: ROUTES.LOGIN,
                         element: <LoginPage />,
+                    },
+                ],
+            },
+            {
+                element: <PrivateRoute />,
+                children: [
+                    {
+                        path: ROUTES.PROFILE,
+                        element: <ProfilePage />,
                     },
                 ],
             },

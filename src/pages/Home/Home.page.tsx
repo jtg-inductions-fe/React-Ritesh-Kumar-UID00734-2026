@@ -1,3 +1,3 @@
-import { SearchContainer } from '@containers/Search/Search.container';
+import { SearchContainer } from '@containers';
 
 export const HomePage = () => <SearchContainer />;

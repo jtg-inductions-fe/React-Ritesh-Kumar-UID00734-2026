@@ -12,11 +12,11 @@ import {
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import logo from '@assets/images/logo.svg';
-import { UserMenu } from '@components/UserMenu/UserMenu.component';
+import { UserMenu } from '@components';
 import { ROUTES } from '@constants';
-import { clearCredentials } from '@features/auth/authSlice';
+import { clearCredentials } from '@features';
 import { useAppDispatch, useAppSelector } from '@store';
-import { clearAuthData } from '@utils/authStorage';
+import { clearAuthData } from '@utils';
 
 import { HeaderAppBar } from './Header.styles';
 

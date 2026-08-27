@@ -1,4 +1,4 @@
-import type { GitHubAuthenticatedUser } from '@_types/github.types';
+import type { GitHubAuthenticatedUser } from '@_types';
 
 const AUTH_USER_KEY = 'github_user';
 const AUTH_TOKEN_KEY = 'github_token';

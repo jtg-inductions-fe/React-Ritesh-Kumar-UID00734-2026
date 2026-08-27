@@ -99,7 +99,7 @@ export const UserMenu = ({
                 <Stack gap={1.5}>
                     <Button
                         component={Link}
-                        to={ROUTES.HOME}
+                        to={ROUTES.PROFILE}
                         variant="outlined"
                         startIcon={<Person />}
                         onClick={onClose}
