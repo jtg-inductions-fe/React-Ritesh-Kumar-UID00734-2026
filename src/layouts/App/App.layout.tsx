@@ -1,14 +1,20 @@
-import { Box } from '@mui/material';
+import { Stack } from '@mui/material';
 
-import type { AppLayoutProps } from './App.types';
+import { Outlet } from 'react-router-dom';
 
-export const AppLayout = ({ children }: AppLayoutProps) => (
-    <Box
+import { HeaderContainer } from '@containers/Header/Header.container';
+
+export const AppLayout = () => (
+    <Stack
         component="main"
         maxWidth={(theme) => theme.spacing(360)}
         minHeight="100vh"
         margin="0 auto"
     >
-        {children}
-    </Box>
+        <HeaderContainer />
+
+        <Stack flex={1}>
+            <Outlet />
+        </Stack>
+    </Stack>
 );

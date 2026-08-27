@@ -12,6 +12,7 @@ import {
 
 import { useNavigate } from 'react-router-dom';
 
+import { ROUTES } from '@constants';
 import { setCredentials } from '@features/auth/authSlice';
 import { useLazyGetAuthenticatedUserQuery } from '@services/github/github.service';
 import { useAppDispatch } from '@store';
@@ -99,7 +100,7 @@ export const LoginContainer = () => {
                 }),
             );
 
-            void navigate('/');
+            void navigate(ROUTES.HOME);
         } catch {
             setLoginError('Invalid GitHub username or personal access token.');
         }
@@ -122,12 +123,16 @@ export const LoginContainer = () => {
         });
     };
 
+    const handleCloseError = () => {
+        setLoginError(undefined);
+    };
+
     return (
         <>
             <Stack
                 component="section"
                 width="100%"
-                minHeight="100vh"
+                flex={1}
                 alignItems="center"
                 justifyContent="center"
                 padding={3}
@@ -204,7 +209,7 @@ export const LoginContainer = () => {
             <Snackbar
                 open={Boolean(loginError)}
                 autoHideDuration={4000}
-                onClose={() => setLoginError(undefined)}
+                onClose={handleCloseError}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
