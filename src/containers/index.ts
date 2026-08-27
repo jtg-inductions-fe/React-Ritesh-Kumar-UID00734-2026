@@ -1,6 +1,6 @@
 export { HeaderContainer } from './Header/Header.container';
 
-export { LoginContainer } from './Login/Login.contianer';
+export { LoginContainer } from './Login/Login.container';
 export type { LoginErrors, LoginFormValues } from './Login/Login.types';
 
 export { ProfileContainer } from './Profile/Profile.container';

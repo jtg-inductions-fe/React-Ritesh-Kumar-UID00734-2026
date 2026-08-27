@@ -19,6 +19,7 @@ import { useAppDispatch } from '@store';
 import { saveAuthData } from '@utils';
 
 import type { LoginErrors, LoginFormValues } from './Login.types';
+import { validateToken, validateUsername } from './Login.utils';
 
 export const LoginContainer = () => {
     const navigate = useNavigate();
@@ -35,12 +36,16 @@ export const LoginContainer = () => {
     const validate = (): LoginErrors => {
         const validationErrors: LoginErrors = {};
 
-        if (!username.trim()) {
-            validationErrors.username = 'Username is required.';
+        const usernameError = validateUsername(username);
+
+        if (usernameError) {
+            validationErrors.username = usernameError;
         }
 
-        if (!token.trim()) {
-            validationErrors.token = 'Personal access token is required.';
+        const tokenError = validateToken(token);
+
+        if (tokenError) {
+            validationErrors.token = tokenError;
         }
 
         return validationErrors;
@@ -61,6 +66,15 @@ export const LoginContainer = () => {
         }
     };
 
+    const handleUsernameBlur = () => {
+        const usernameError = validateUsername(username);
+
+        setErrors((currentErrors) => ({
+            ...currentErrors,
+            username: usernameError,
+        }));
+    };
+
     const handleTokenChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
 
@@ -72,6 +86,15 @@ export const LoginContainer = () => {
                 token: undefined,
             }));
         }
+    };
+
+    const handleTokenBlur = () => {
+        const tokenError = validateToken(token);
+
+        setErrors((currentErrors) => ({
+            ...currentErrors,
+            token: tokenError,
+        }));
     };
 
     const handleLogin = async ({
@@ -100,7 +123,7 @@ export const LoginContainer = () => {
                 }),
             );
 
-            void navigate(ROUTES.PROFILE);
+            void navigate(ROUTES.HOME);
         } catch {
             setLoginError('Invalid GitHub username or personal access token.');
         }
@@ -123,16 +146,12 @@ export const LoginContainer = () => {
         });
     };
 
-    const handleCloseError = () => {
-        setLoginError(undefined);
-    };
-
     return (
         <>
             <Stack
                 component="section"
                 width="100%"
-                flex={1}
+                minHeight="100vh"
                 alignItems="center"
                 justifyContent="center"
                 padding={3}
@@ -167,6 +186,7 @@ export const LoginContainer = () => {
                             placeholder="Enter your GitHub username"
                             value={username}
                             onChange={handleUsernameChange}
+                            onBlur={handleUsernameBlur}
                             error={Boolean(errors.username)}
                             helperText={errors.username}
                             fullWidth
@@ -179,6 +199,7 @@ export const LoginContainer = () => {
                             type="password"
                             value={token}
                             onChange={handleTokenChange}
+                            onBlur={handleTokenBlur}
                             error={Boolean(errors.token)}
                             helperText={errors.token}
                             fullWidth
@@ -209,7 +230,7 @@ export const LoginContainer = () => {
             <Snackbar
                 open={Boolean(loginError)}
                 autoHideDuration={4000}
-                onClose={handleCloseError}
+                onClose={() => setLoginError(undefined)}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'center',
