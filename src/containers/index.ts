@@ -1,6 +1,3 @@
-export { AuthContainer } from './Auth/Auth.container';
-export type { AuthContainerProps } from './Auth/Auth.types';
-
 export { HeaderContainer } from './Header/Header.container';
 
 export { LoginContainer } from './Login/Login.contianer';
